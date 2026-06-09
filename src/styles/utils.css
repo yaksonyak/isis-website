@@ -1,0 +1,140 @@
+/* ── BUTTONS ──────────────────────────────────────── */
+.btn-red {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red);
+  color: #fff;
+  padding: 13px 28px;
+  border-radius: var(--r8);
+  font-weight: 600;
+  font-size: 15px;
+  border: 2px solid var(--red);
+  transition: all var(--t);
+  white-space: nowrap;
+}
+.btn-red:hover {
+  background: var(--red-dark);
+  border-color: var(--red-dark);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-red);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--blue);
+  padding: 13px 28px;
+  border-radius: var(--r8);
+  font-weight: 600;
+  font-size: 15px;
+  border: 2px solid var(--blue);
+  transition: all var(--t);
+  white-space: nowrap;
+}
+.btn-outline:hover {
+  background: var(--blue);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-blue);
+}
+
+.btn-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  color: var(--red);
+  padding: 14px 36px;
+  border-radius: var(--r8);
+  font-weight: 700;
+  font-size: 15px;
+  border: 2px solid #fff;
+  transition: all var(--t);
+  white-space: nowrap;
+}
+.btn-white:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0,0,0,.2);
+}
+
+/* ── LINK ARROW ───────────────────────────────────── */
+.link-arrow {
+  color: var(--blue);
+  font-weight: 600;
+  font-size: 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: gap var(--t), color var(--t);
+}
+.link-arrow:hover {
+  color: var(--red);
+  gap: 10px;
+}
+
+/* ── SECTION LABELS ───────────────────────────────── */
+.section-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--red);
+  margin-bottom: 14px;
+  text-align: center;
+}
+.section-title {
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 16px;
+  color: var(--dark);
+  line-height: 1.2;
+}
+.section-title em {
+  color: var(--red);
+  font-style: normal;
+}
+.section-sub {
+  font-size: 16px;
+  color: var(--gray);
+  text-align: center;
+  max-width: 540px;
+  margin: 0 auto 60px;
+  line-height: 1.7;
+}
+
+/* ── FILTER BUTTONS ───────────────────────────────── */
+.filter-bar {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+}
+.filter-btn {
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1.5px solid var(--gray-light);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--t);
+  color: var(--gray);
+  font-family: 'Poppins', sans-serif;
+}
+.filter-btn.active,
+.filter-btn:hover {
+  background: var(--blue);
+  color: #fff;
+  border-color: var(--blue);
+  box-shadow: var(--shadow-blue);
+}
+
+/* ── TEXT CENTER ──────────────────────────────────── */
+.text-center {
+  text-align: center;
+}
