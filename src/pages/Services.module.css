@@ -1,25 +1,24 @@
-.section { padding: clamp(72px, 9vw, 120px) 0 40px; }
-
-.cta { padding: 40px 0 clamp(80px, 10vw, 130px); }
-
-.ctaCard {
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 32px;
-  flex-wrap: wrap;
-  border-radius: var(--r20);
-  padding: clamp(40px, 6vw, 72px);
-  background: linear-gradient(135deg, #B5562F, #8D3F1F);
-  color: var(--ivory);
+.section {
+  background: var(--light);
+  padding: 96px 5%;
 }
 
-.ctaPattern { position: absolute; inset: 0; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  max-width: 1140px;
+  margin: 0 auto;
+}
 
-.ctaText { position: relative; max-width: 620px; }
-.ctaText h2 { font-size: clamp(32px, 4vw, 52px); line-height: 1.05; margin-bottom: 16px; }
-.ctaText h2 em { color: #F3D9A8; }
-.ctaText p { font-size: 16px; line-height: 1.7; color: rgba(248, 244, 236, .8); }
-.ctaCard :global(.btn-white) { position: relative; }
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

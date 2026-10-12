@@ -1,4 +1,3 @@
-
 export const articles = [
   {
     id: 1,
