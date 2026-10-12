@@ -35,14 +35,15 @@ src/
 │       ├── logo.png                 # Logo original
 │       └── logo-transparent.png     # Logo fond transparent (utilisé)
 ├── components/
-│   ├── Header.jsx / .module.css     # Navigation sticky + menu mobile
-│   ├── Footer.jsx / .module.css     # Footer 4 colonnes
-│   ├── PageHero.jsx / .module.css   # Entête pages internes (photo + overlay)
-│   ├── ServiceCard.jsx / .module.css # Carte service (grid + detail)
-│   ├── StatCard.jsx / .module.css   # Compteur animé
-│   ├── PartnerSection.jsx / .module.css
-│   ├── TestimonialCard.jsx / .module.css
-│   ├── CTASection.jsx / .module.css
+│   ├── Header.jsx / .module.css     # Navigation sticky + menu mobile plein écran
+│   ├── Footer.jsx / .module.css     # Footer + appel à l'action
+│   ├── PageHero.jsx / .module.css   # Entête pages internes (indigo + bogolan)
+│   ├── Motifs.jsx                   # Illustrations SVG : bogolan, Djenné, couvertures
+│   ├── serviceIcons.jsx             # Icônes des services
+│   ├── ServiceList.jsx / .module.css # Liste numérotée des expertises
+│   ├── Testimonials.jsx / .module.css # Carrousel de témoignages
+│   ├── PartnerSection.jsx / .module.css # Bandeau défilant technologies
+│   ├── Reveal.jsx                   # Animation d'apparition au scroll
 │   └── ContactForm.jsx / .module.css
 ├── pages/
 │   ├── Home.jsx / .module.css       # / 
@@ -63,15 +64,21 @@ src/
 └── main.jsx            # Entry point
 ```
 
-## Couleurs & identité visuelle
+## Direction artistique « Banco & Indigo »
+
+Identité inspirée du Mali : l'indigo des teintures, l'ocre du banco de Djenné,
+le sable du Sahel et les motifs du bogolan, alliés au corail et au bleu du logo.
+Typographies : **Fraunces** (titres, serif) et **Manrope** (texte).
 
 | Token | Valeur | Usage |
 |---|---|---|
-| `--blue` | `#1E88E5` | Couleur principale |
-| `--blue-dark` | `#1565C0` | Hover / gradient |
-| `--red` | `#FF4D4F` | CTA / accent |
-| `--dark` | `#0F172A` | Textes |
-| `--gray` | `#64748B` | Corps de texte |
+| `--ink` | `#0B1324` | Indigo nuit — fonds sombres, textes |
+| `--ivory` | `#F8F4EC` | Sable clair — fond principal |
+| `--sand` | `#EFE6D6` | Sections secondaires |
+| `--clay` | `#B5562F` | Terre de banco — accents |
+| `--ochre` | `#C99A4B` | Or sahélien — filets, accents sur fond sombre |
+| `--coral` | `#F0544F` | Rouge du logo — survols, CTA |
+| `--sky` | `#38B2F5` | Bleu du logo — le fleuve Niger |
 
 ## Routes
 
@@ -84,8 +91,12 @@ src/
 | `/blog` | Blog |
 | `/contact` | Contact |
 
-## Images
+## Visuels
 
-Les photos utilisent Unsplash CDN avec `crop=faces,center` pour un cadrage optimal.
-Pour personnaliser, remplacez les URLs dans `src/data/projects.js`, `src/data/blog.js`
-et les constantes `BASE + photo-ID` dans `Home.jsx`, `About.jsx`, etc.
+Le site n'utilise **aucune photo de stock** : tous les visuels sont des
+illustrations SVG originales (`src/components/Motifs.jsx`) inspirées du
+patrimoine malien — Grande Mosquée de Djenné, fleuve Niger, motifs bogolan.
+Les couvertures des réalisations et articles sont générées par catégorie.
+
+Pour ajouter de vraies photos de l'équipe ISIS ou de vos projets à Bamako,
+placez-les dans `src/assets/` et importez-les dans les pages concernées.

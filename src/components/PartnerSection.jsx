@@ -1,40 +1,22 @@
-import { motion } from 'framer-motion';
 import styles from './PartnerSection.module.css';
 
-const PARTNERS = [
-  { name: 'AXELOR', style: { color: '#1E88E5', fontSize: '22px' }, highlight: { color: '#FF4D4F' }, highlightChar: 'L' },
-  { name: 'Dolibarr', style: { color: '#2196F3', fontSize: '22px' } },
-  { name: 'Java', style: { color: '#E65100', fontSize: '20px' } },
-  { name: 'Spring', style: { color: '#6db33f', fontSize: '20px' } },
-  { name: 'Angular', style: { color: '#DD0031', fontSize: '20px' } },
-];
+const PARTNERS = ['Axelor', 'Dolibarr', 'Java', 'Spring Boot', 'Angular', 'Flutter', 'PostgreSQL', 'Docker', 'Linux'];
 
-export default function PartnerSection({ eyebrow = 'ILS NOUS FONT CONFIANCE' }) {
+export default function PartnerSection({ eyebrow = 'Notre écosystème technologique' }) {
+  const items = [...PARTNERS, ...PARTNERS];
   return (
-    <section className={styles.section}>
+    <section className={styles.section} aria-label={eyebrow}>
       <div className={styles.eyebrow}>{eyebrow}</div>
-      <motion.div
-        className={styles.logos}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        {PARTNERS.map((p) => (
-          <motion.div
-            key={p.name}
-            className={styles.logo}
-            style={{ ...p.style, fontWeight: 800 }}
-            whileHover={{ opacity: 0.9, scale: 1.05 }}
-          >
-            {p.name === 'AXELOR' ? (
-              <>AXE<span style={{ color: '#FF4D4F' }}>L</span>ØR</>
-            ) : (
-              p.name
-            )}
-          </motion.div>
-        ))}
-      </motion.div>
+      <div className={styles.track}>
+        <div className={styles.marquee}>
+          {items.map((p, i) => (
+            <span key={i} className={styles.logo} aria-hidden={i >= PARTNERS.length}>
+              {p}
+              <span className={styles.star}>✦</span>
+            </span>
+          ))}
+        </div>
+      </div>
     </section>
   );
 }

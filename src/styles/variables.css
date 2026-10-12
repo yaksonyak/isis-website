@@ -1,32 +1,59 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Manrope:wght@400;500;600;700;800&display=swap');
 
+/*
+ * Direction artistique « Banco & Indigo »
+ * Inspirée du Mali : l'indigo des teintures, l'ocre du banco de Djenné,
+ * le sable du Sahel et les motifs du bogolan — alliés au corail et au bleu
+ * du logo ISIS.
+ */
 :root {
-  /* Colors */
-  --blue: #1E88E5;
-  --blue-dark: #1565C0;
-  --blue-light: #E3F2FD;
-  --red: #FF4D4F;
-  --red-dark: #E03538;
+  /* Palette */
+  --ink: #0B1324;          /* indigo nuit */
+  --ink-2: #131D33;
+  --ink-3: #1D2A45;
+  --ivory: #F8F4EC;        /* sable clair */
+  --sand: #EFE6D6;
+  --sand-2: #E2D4BC;
+  --clay: #B5562F;         /* terre de banco */
+  --ochre: #C99A4B;        /* or sahélien */
+  --coral: #F0544F;        /* rouge du logo */
+  --coral-dark: #D63F3A;
+  --sky: #38B2F5;          /* bleu du logo */
+  --text: #1A2238;
+  --muted: #5E6578;
+  --line: rgba(11, 19, 36, .12);
+  --line-light: rgba(248, 244, 236, .14);
   --white: #FFFFFF;
-  --light: #F8FAFC;
-  --gray: #64748B;
-  --gray-light: #E2E8F0;
-  --dark: #0F172A;
+
+  /* Legacy aliases (kept so nothing breaks) */
+  --blue: var(--sky);
+  --red: var(--coral);
+  --dark: var(--ink);
+  --gray: var(--muted);
+  --light: var(--ivory);
+  --gray-light: var(--line);
+
+  /* Type */
+  --serif: 'Fraunces', 'Georgia', serif;
+  --sans: 'Manrope', system-ui, -apple-system, sans-serif;
 
   /* Shadows */
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.08);
-  --shadow-md: 0 4px 16px rgba(0,0,0,.08);
-  --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
-  --shadow-blue: 0 8px 32px rgba(30,136,229,.25);
-  --shadow-red: 0 8px 32px rgba(255,77,79,.3);
+  --shadow-sm: 0 1px 2px rgba(11, 19, 36, .06);
+  --shadow-md: 0 10px 30px -12px rgba(11, 19, 36, .18);
+  --shadow-lg: 0 30px 60px -20px rgba(11, 19, 36, .28);
 
-  /* Border radius */
-  --r8: 8px;
+  /* Radius */
+  --r8: 6px;
   --r14: 14px;
-  --r20: 20px;
+  --r20: 22px;
 
-  /* Transition */
-  --t: .25s cubic-bezier(.4,0,.2,1);
+  /* Layout */
+  --header-h: 84px;
+  --max: 1240px;
+  --gutter: clamp(20px, 5vw, 64px);
+
+  /* Motion */
+  --t: .35s cubic-bezier(.22, .61, .36, 1);
 }
 
 *, *::before, *::after {
@@ -40,11 +67,29 @@ html {
 }
 
 body {
-  font-family: 'Poppins', sans-serif;
-  color: var(--dark);
-  background: var(--white);
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--ivory);
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+main {
+  padding-top: var(--header-h);
+}
+
+h1, h2, h3 {
+  font-family: var(--serif);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  font-variation-settings: 'opsz' 120;
+}
+
+h1 em, h2 em, h3 em {
+  font-style: italic;
+  font-weight: 300;
+  color: var(--clay);
 }
 
 a {
@@ -53,7 +98,7 @@ a {
 }
 
 button {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--sans);
   cursor: pointer;
 }
 
@@ -64,4 +109,22 @@ img {
 
 ul {
   list-style: none;
+}
+
+::selection {
+  background: var(--coral);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--coral);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
 }

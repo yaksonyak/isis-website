@@ -1,235 +1,267 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
-import { Link, useNavigate } from 'react-router-dom';
-import { useInView } from 'framer-motion';
-import ServiceCard from '../components/ServiceCard';
-import StatCard from '../components/StatCard';
-import TestimonialCard from '../components/TestimonialCard';
-import CTASection from '../components/CTASection';
+import { motion, useInView } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import PartnerSection from '../components/PartnerSection';
+import ServiceList from '../components/ServiceList';
+import Testimonials from '../components/Testimonials';
+import Reveal from '../components/Reveal';
+import { DjenneArt, BogolanPattern, ArrowIcon } from '../components/Motifs';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
 import styles from './Home.module.css';
 
-const BASE = 'https://images.unsplash.com';
-const HERO_IMG = `${BASE}/photo-1573497019940-1c28c88b4f3e?w=900&q=85&fit=crop&crop=faces,center&auto=format`;
-const ABOUT_IMG = `${BASE}/photo-1531482615713-2afd69097998?w=800&q=85&fit=crop&crop=faces,center&auto=format`;
+const EASE = [0.22, 0.61, 0.36, 1];
 
-const ArrowIcon = () => (
-  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-    <line x1="5" y1="12" x2="19" y2="12" />
-    <polyline points="12 5 19 12 12 19" />
-  </svg>
-);
-
-function Counter({ to, suffix }) {
+function Counter({ to, suffix = '' }) {
   const [val, setVal] = useState(0);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
   useEffect(() => {
     if (!inView) return;
     let start = null;
-    const dur = 1600;
+    let raf;
     const tick = (ts) => {
       if (!start) start = ts;
-      const p = Math.min((ts - start) / dur, 1);
-      const e = 1 - Math.pow(1 - p, 3);
-      setVal(Math.floor(e * to));
-      if (p < 1) requestAnimationFrame(tick);
+      const p = Math.min((ts - start) / 1800, 1);
+      setVal(Math.round((1 - Math.pow(1 - p, 3)) * to));
+      if (p < 1) raf = requestAnimationFrame(tick);
     };
-    requestAnimationFrame(tick);
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
   }, [inView, to]);
   return <span ref={ref}>{val}{suffix}</span>;
 }
 
 const STATS = [
-  {
-    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 16l4-8 4 8"/><path d="M9 12h6"/></svg>,
-    value: 50, suffix: '+', label: 'Projets réalisés',
-  },
-  {
-    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-    value: 30, suffix: '+', label: 'Clients satisfaits',
-  },
-  {
-    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-    value: 5, suffix: '+', label: "Années d'expérience",
-  },
-  {
-    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>,
-    value: 100, suffix: '%', label: 'Engagement qualité',
-  },
+  { value: 50, suffix: '+', label: 'Projets livrés' },
+  { value: 30, suffix: '+', label: 'Clients accompagnés' },
+  { value: 5, suffix: '+', label: "Années d'expérience" },
+  { value: 100, suffix: '%', label: 'Engagement qualité' },
+];
+
+const STEPS = [
+  { k: 'Écouter', d: "Immersion dans vos métiers, vos contraintes et votre réalité terrain : réseau, budget, usages." },
+  { k: 'Concevoir', d: "Architecture sobre et robuste, pensée pour durer et évoluer avec votre organisation." },
+  { k: 'Déployer', d: "Mise en production maîtrisée, migration des données et accompagnement au changement." },
+  { k: 'Transmettre', d: "Formation de vos équipes pour une autonomie réelle — le savoir reste chez vous." },
+];
+
+const CITIES = [
+  { name: 'Bamako', x: 300, y: 196, main: true },
+  { name: 'Dakar', x: 92, y: 132 },
+  { name: 'Abidjan', x: 286, y: 330 },
 ];
 
 export default function Home() {
-  const navigate = useNavigate();
-
   return (
     <main>
       {/* ── HERO ── */}
       <section className={styles.hero}>
-        <motion.div
-          className={styles.heroText}
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className={styles.heroBadge}>
-            <span className={styles.heroDot} />
-            ISIS Consulting — Bamako, Mali
-          </div>
-          <h1>
-            Accélérez votre<br />
-            transformation <em>digitale</em>
-          </h1>
-          <p className={styles.heroSub}>
-            Nous accompagnons les entreprises d'Afrique de l'Ouest dans leur
-            transformation numérique grâce à des solutions innovantes,
-            performantes et adaptées à leur contexte.
-          </p>
-          <div className={styles.heroBtns}>
-            <button className="btn-red" onClick={() => navigate('/contact')}>
-              Demander un devis
-            </button>
-            <button className="btn-outline" onClick={() => navigate('/services')}>
-              Découvrir nos services
-            </button>
-          </div>
-          <div className={styles.heroProofs}>
-            <span><span className={styles.proofDot} />Expertise certifiée</span>
-            <span><span className={styles.proofDot} />50+ projets réalisés</span>
-            <span><span className={styles.proofDot} />Afrique de l'Ouest</span>
-          </div>
-        </motion.div>
+        <div className={styles.heroInner}>
+          <div className={styles.heroText}>
+            <motion.div
+              className={styles.heroBadge}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: EASE }}
+            >
+              <span className={styles.heroDot} />
+              Cabinet de conseil IT · Bamako, Mali
+            </motion.div>
 
-        <motion.div
-          className={styles.heroVisual}
-          initial={{ opacity: 0, y: 28 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.15 }}
-        >
-          <div className={styles.heroPhoto}>
-            <img
-              src={HERO_IMG}
-              srcSet={`${BASE}/photo-1573497019940-1c28c88b4f3e?w=600&q=80&fit=crop&crop=faces,center&auto=format 600w,
-                       ${BASE}/photo-1573497019940-1c28c88b4f3e?w=900&q=85&fit=crop&crop=faces,center&auto=format 900w,
-                       ${BASE}/photo-1573497019940-1c28c88b4f3e?w=1200&q=85&fit=crop&crop=faces,center&auto=format 1200w`}
-              sizes="(max-width: 900px) 100vw, 50vw"
-              alt="Consultante IT professionnelle en environnement de travail moderne"
-              loading="eager"
-              decoding="async"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `${BASE}/photo-1600880292089-90a7e086ee0c?w=900&q=85&fit=crop&auto=format`;
-              }}
-            />
-            <div className={styles.heroOverlay} />
-            <div className={styles.heroStats}>
-              <div className={styles.heroStat}>
-                <div className={styles.heroStatN}><Counter to={50} suffix="+" /></div>
-                <div className={styles.heroStatL}>Projets réalisés</div>
-              </div>
-              <div className={styles.heroStat}>
-                <div className={styles.heroStatN}><Counter to={30} suffix="+" /></div>
-                <div className={styles.heroStatL}>Clients satisfaits</div>
-              </div>
-            </div>
+            <motion.h1
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.1, ease: EASE }}
+            >
+              L'expertise numérique, <em>enracinée</em> au Mali.
+            </motion.h1>
+
+            <motion.p
+              className={styles.heroSub}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.25, ease: EASE }}
+            >
+              Logiciels sur mesure, ERP, audit et conseil : nous accompagnons les
+              entreprises et institutions d'Afrique de l'Ouest avec des solutions
+              exigeantes, pensées pour leur réalité.
+            </motion.p>
+
+            <motion.div
+              className={styles.heroBtns}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.38, ease: EASE }}
+            >
+              <Link to="/contact" className="btn-red">Demander un devis <ArrowIcon /></Link>
+              <Link to="/services" className="btn-outline">Nos expertises</Link>
+            </motion.div>
           </div>
-        </motion.div>
+
+          <motion.div
+            className={styles.heroVisual}
+            initial={{ opacity: 0, scale: 0.96 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, delay: 0.15, ease: EASE }}
+          >
+            <DjenneArt className={styles.heroArt} />
+
+            <motion.div
+              className={`${styles.float} ${styles.floatA}`}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.8, ease: EASE }}
+            >
+              <span className={styles.floatN}><Counter to={50} suffix="+" /></span>
+              <span className={styles.floatL}>projets livrés<br />en Afrique de l'Ouest</span>
+            </motion.div>
+
+            <motion.div
+              className={`${styles.float} ${styles.floatB}`}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1, ease: EASE }}
+            >
+              <span className={styles.pulse} />
+              <span className={styles.floatL}><strong>Axelor · Dolibarr</strong><br />intégration ERP sur mesure</span>
+            </motion.div>
+          </motion.div>
+        </div>
+
+        <div className={styles.heroFoot}>
+          <span>Mali</span><span className={styles.sepDot} />
+          <span>Sénégal</span><span className={styles.sepDot} />
+          <span>Côte d'Ivoire</span><span className={styles.sepDot} />
+          <span>Afrique de l'Ouest</span>
+        </div>
       </section>
 
-      {/* ── ABOUT PREVIEW ── */}
-      <section className={styles.aboutSection}>
-        <div className={styles.aboutSplit}>
-          <motion.div
-            className={styles.aboutText}
-            initial={{ opacity: 0, x: -32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
-          >
-            <div className={styles.splitEye}>À PROPOS DE NOUS</div>
-            <h2>
-              L'expertise IT au service<br />
-              de votre <em>performance</em>
-            </h2>
-            <p>
-              ISIS Consulting SARL est une société de conseil et de services
-              informatiques fondée à Bamako. Nous intervenons en Afrique de
-              l'Ouest pour accompagner les entreprises dans le développement
-              logiciel, l'intégration ERP, l'audit IT, le conseil et la formation.
-            </p>
-            <Link to="/about" className="link-arrow">
-              En savoir plus <ArrowIcon />
-            </Link>
-          </motion.div>
+      <PartnerSection />
 
-          <motion.div
-            className={styles.aboutPhotoWrap}
-            initial={{ opacity: 0, x: 32 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-60px' }}
-            transition={{ duration: 0.7 }}
-          >
-            <img
-              src={ABOUT_IMG}
-              srcSet={`${BASE}/photo-1531482615713-2afd69097998?w=600&q=80&fit=crop&crop=faces,center&auto=format 600w,
-                       ${BASE}/photo-1531482615713-2afd69097998?w=800&q=85&fit=crop&crop=faces,center&auto=format 800w`}
-              sizes="(max-width: 900px) 100vw, 45vw"
-              alt="Équipe de consultants en réunion professionnelle collaborative"
-              loading="lazy"
-              decoding="async"
-              onError={(e) => {
-                e.target.onerror = null;
-                e.target.src = `${BASE}/photo-1522202176988-66273c2fd55f?w=800&q=85&fit=crop&auto=format`;
-              }}
-            />
-          </motion.div>
+      {/* ── MANIFESTE ── */}
+      <section className={styles.manifesto}>
+        <div className="container">
+          <Reveal>
+            <div className="section-eyebrow">Notre conviction</div>
+          </Reveal>
+          <Reveal delay={0.05}>
+            <p className={styles.statement}>
+              La transformation digitale de l'Afrique ne s'importe pas : elle se
+              <em> construit</em>, ici, avec des talents qui connaissent le
+              terrain. Depuis Bamako, nous allions <em>rigueur internationale</em> et
+              compréhension intime du contexte local.
+            </p>
+          </Reveal>
+
+          <div className={styles.manifestoFoot}>
+            <Reveal delay={0.1}>
+              <p className={styles.manifestoNote}>
+                ISIS Consulting SARL accompagne PME, grandes entreprises et
+                institutions dans le développement logiciel, l'intégration ERP,
+                l'audit IT, le conseil et la formation.
+              </p>
+            </Reveal>
+            <Reveal delay={0.15}>
+              <Link to="/about" className="link-arrow">Découvrir le cabinet <ArrowIcon /></Link>
+            </Reveal>
+          </div>
+
+          <div className={styles.stats}>
+            {STATS.map((s, i) => (
+              <Reveal key={s.label} delay={i * 0.08} className={styles.stat}>
+                <div className={styles.statN}><Counter to={s.value} suffix={s.suffix} /></div>
+                <div className={styles.statL}>{s.label}</div>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ── SERVICES ── */}
-      <section className={styles.servicesSection}>
-        <div className="section-eyebrow">NOS SERVICES</div>
-        <h2 className="section-title">Des solutions adaptées<br />à vos besoins</h2>
-        <p className="section-sub">
-          Une gamme complète de services IT pour votre transformation numérique en Afrique de l'Ouest.
-        </p>
-        <div className={styles.servicesGrid}>
-          {services.map((s, i) => (
-            <ServiceCard key={s.id} service={s} delay={i * 0.08} />
-          ))}
+      <section className={styles.services}>
+        <div className="container">
+          <div className={styles.sectionHead}>
+            <Reveal>
+              <div className="section-eyebrow">Expertises</div>
+              <h2 className="section-title">Cinq métiers,<br /><em>une exigence.</em></h2>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <p className="section-sub">
+                Une offre complète pour couvrir chaque étape de votre transformation
+                numérique, du diagnostic à l'autonomie de vos équipes.
+              </p>
+            </Reveal>
+          </div>
+          <ServiceList services={services} />
         </div>
       </section>
 
-      {/* ── STATS ── */}
-      <section className={styles.statsSection}>
-        <div className={styles.statsBox}>
-          {STATS.map((s, i) => (
-            <StatCard key={i} {...s} delay={i * 0.1} />
-          ))}
+      {/* ── MÉTHODE ── */}
+      <section className={styles.method}>
+        <div className="container">
+          <div className={styles.sectionHead}>
+            <Reveal>
+              <div className="section-eyebrow">Notre approche</div>
+              <h2 className="section-title">Une méthode <em>éprouvée</em>,<br />un rythme humain.</h2>
+            </Reveal>
+          </div>
+          <div className={styles.steps}>
+            {STEPS.map((s, i) => (
+              <Reveal key={s.k} delay={i * 0.1} className={styles.step}>
+                <BogolanPattern color="#B5562F" opacity={0.22} scale={0.7} className={styles.stepPattern} />
+                <span className={styles.stepNum}>0{i + 1}</span>
+                <h3>{s.k}</h3>
+                <p>{s.d}</p>
+              </Reveal>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ── PARTNERS ── */}
-      <PartnerSection />
+      {/* ── ANCRAGE ── */}
+      <section className={styles.region}>
+        <div className={`container ${styles.regionGrid}`}>
+          <Reveal>
+            <div className="section-eyebrow">Ancrage</div>
+            <h2 className="section-title">Né à Bamako,<br /><em>tourné vers la région.</em></h2>
+            <p className="section-sub">
+              Nos consultants, développeurs et auditeurs sont basés au Mali. Nous
+              intervenons sur site ou à distance pour nos clients de toute
+              l'Afrique de l'Ouest.
+            </p>
+            <Link to="/contact" className="link-arrow" style={{ marginTop: 32 }}>Nous rencontrer <ArrowIcon /></Link>
+          </Reveal>
 
-      {/* ── TESTIMONIALS ── */}
-      <section className={styles.testiSection}>
-        <div className="section-eyebrow">TÉMOIGNAGES</div>
-        <h2 className="section-title">Ce que disent nos clients</h2>
-        <p className="section-sub">
-          Des partenaires à travers l'Afrique de l'Ouest qui nous font confiance.
-        </p>
-        <div className={styles.testiGrid}>
-          {testimonials.map((t, i) => (
-            <TestimonialCard key={t.id} testimonial={t} delay={i * 0.1} />
-          ))}
+          <Reveal delay={0.15} className={styles.mapWrap}>
+            <svg viewBox="0 0 440 400" className={styles.map} role="img" aria-label="Carte stylisée de l'Afrique de l'Ouest : Bamako, Dakar, Abidjan">
+              <defs>
+                <pattern id="mapdots" width="12" height="12" patternUnits="userSpaceOnUse">
+                  <circle cx="6" cy="6" r="1.6" fill="#B5562F" opacity=".35" />
+                </pattern>
+                <clipPath id="westAfrica">
+                  <path d="M60 110 Q70 70 120 64 L220 58 Q290 40 360 62 Q420 80 428 150 L420 250 Q410 300 360 318 L300 344 Q240 360 190 330 Q150 300 110 270 Q70 230 62 180 Z" />
+                </clipPath>
+              </defs>
+              <rect width="440" height="400" fill="url(#mapdots)" clipPath="url(#westAfrica)" />
+              {/* fleuve Niger */}
+              <path d="M150 230 Q210 210 260 200 Q300 192 330 160 Q360 128 400 140" fill="none" stroke="#38B2F5" strokeWidth="2" strokeOpacity=".7" strokeDasharray="4 6" />
+              {CITIES.filter((c) => !c.main).map((c) => (
+                <path key={c.name} d={`M300 196 Q${(300 + c.x) / 2} ${Math.min(196, c.y) - 50} ${c.x} ${c.y}`} fill="none" stroke="#0B1324" strokeOpacity=".35" strokeWidth="1" />
+              ))}
+              {CITIES.map((c) => (
+                <g key={c.name}>
+                  {c.main && <circle cx={c.x} cy={c.y} r="18" fill="#F0544F" opacity=".18" className={styles.ping} />}
+                  <circle cx={c.x} cy={c.y} r={c.main ? 7 : 5} fill={c.main ? '#F0544F' : '#0B1324'} />
+                  <text x={c.x + 12} y={c.y + 4} fontFamily="Manrope, sans-serif" fontSize={c.main ? 15 : 13} fontWeight={c.main ? 800 : 600} fill="#0B1324">{c.name}</text>
+                </g>
+              ))}
+            </svg>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── CTA ── */}
-      <CTASection />
+      <Testimonials items={testimonials} />
     </main>
   );
 }
