@@ -62,7 +62,7 @@ export default function ContactForm() {
             id="telephone"
             name="telephone"
             type="tel"
-            placeholder="+223 XX XXX XXX"
+            placeholder="+223 00 00 00 00"
             value={form.telephone}
             onChange={handleChange}
           />

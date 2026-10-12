@@ -42,8 +42,9 @@ export default function Footer() {
         <div className={styles.col}>
           <h4>Contact</h4>
           <ul>
-            <li><a href="tel:+22300000000">+223 XX XXX XXX</a></li>
-            <li><a href="mailto:contact@isis-consulting.com">contact@isis-consulting.com</a></li>
+            <li><a href="tel:+22366614663">+223 66 61 46 63</a></li>
+            <li><a href="tel:+22376299328">+223 76 29 93 28</a></li>
+            <li><a href="mailto:Commercial@isis-consulting.ml">Commercial@isis-consulting.ml</a></li>
             <li><span>Bamako, Mali</span></li>
           </ul>
         </div>

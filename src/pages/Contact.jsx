@@ -21,7 +21,12 @@ const CONTACT_ITEMS = [
       </svg>
     ),
     label: 'Téléphone',
-    value: '+223 XX XXX XXX',
+    value: (
+      <>
+        <a href="tel:+22366614663">+223 66 61 46 63</a><br />
+        <a href="tel:+22376299328">+223 76 29 93 28</a>
+      </>
+    ),
   },
   {
     icon: (
@@ -31,7 +36,7 @@ const CONTACT_ITEMS = [
       </svg>
     ),
     label: 'Email',
-    value: 'contact@isis-consulting.com',
+    value: <a href="mailto:Commercial@isis-consulting.ml">Commercial@isis-consulting.ml</a>,
   },
   {
     icon: (

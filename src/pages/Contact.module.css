@@ -70,6 +70,15 @@
 .itemValue {
   font-size: 14px;
   color: var(--gray);
+  line-height: 1.7;
+}
+
+.itemValue a {
+  transition: color var(--t);
+}
+
+.itemValue a:hover {
+  color: var(--blue);
 }
 
 .formCol h2 {
