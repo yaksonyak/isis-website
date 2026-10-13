@@ -48,7 +48,11 @@ export default function Projects() {
                 whileHover={{ y: -6 }}
               >
                 <div className={styles.imgWrap}>
-                  <Cover category={p.category} seed={p.id} label={p.title} />
+                  {p.image ? (
+                    <img src={p.image} alt={`Capture d'écran — ${p.title}`} loading="lazy" decoding="async" className={styles.shot} />
+                  ) : (
+                    <Cover category={p.category} seed={p.id} label={p.title} />
+                  )}
                   <span className={styles.tag}>{p.category}</span>
                 </div>
                 <div className={styles.info}>

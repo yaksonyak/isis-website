@@ -10,6 +10,8 @@ import PartnerSection from '../components/PartnerSection';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
 import { DashboardArt, BamakoArt } from '../components/Illustrations';
+import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
+import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
 import styles from './Home.module.css';
 
 
@@ -39,6 +41,34 @@ function Counter({ to, suffix }) {
   }, [inView, to]);
   return <span ref={ref}>{val}{suffix}</span>;
 }
+
+const ico = (d) => (
+  <svg fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">{d}</svg>
+);
+
+const DMPE_FEATURES = [
+  {
+    icon: ico(<><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" /><polyline points="14 2 14 8 20 8" /><line x1="12" y1="18" x2="12" y2="12" /><line x1="9" y1="15" x2="15" y2="15" /></>),
+    title: 'Dossiers patients',
+    desc: "Consultations, liste d'attente, analyses, rendez-vous et registre.",
+  },
+  {
+    icon: ico(<><line x1="18" y1="20" x2="18" y2="10" /><line x1="12" y1="20" x2="12" y2="4" /><line x1="6" y1="20" x2="6" y2="14" /></>),
+    title: 'Statistiques sanitaires',
+    desc: 'Activités curatives, accouchements, vaccination, planning familial — par région et par centre.',
+  },
+  {
+    icon: ico(<><rect x="4" y="2" width="16" height="20" rx="2" /><line x1="8" y1="6" x2="16" y2="6" /><line x1="8" y1="10" x2="16" y2="10" /><line x1="8" y1="14" x2="12" y2="14" /></>),
+    title: 'Pharmacie & comptabilité',
+    desc: 'Gestion des stocks de médicaments et suivi financier intégrés.',
+  },
+  {
+    icon: ico(<><rect x="5" y="2" width="14" height="20" rx="2" /><line x1="12" y1="18" x2="12.01" y2="18" /><path d="M2 2l20 20" /></>),
+    title: 'Application mobile hors connexion',
+    desc: 'Les agents de santé travaillent sans réseau ; les données se synchronisent automatiquement.',
+    highlight: true,
+  },
+];
 
 const STATS = [
   {
@@ -171,6 +201,68 @@ export default function Home() {
           {services.map((s, i) => (
             <ServiceCard key={s.id} service={s} delay={i * 0.08} />
           ))}
+        </div>
+      </section>
+
+      {/* ── RÉALISATION PHARE : DMPe ── */}
+      <section className={styles.caseSection}>
+        <div className={styles.caseGrid}>
+          <motion.div
+            className={styles.caseText}
+            initial={{ opacity: 0, x: -32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className={styles.splitEye}>RÉALISATION PHARE · SANTÉ</div>
+            <h2>
+              DMPe — le dossier médical<br />
+              patient <em>électronique</em>
+            </h2>
+            <p>
+              Une plateforme complète pour les CSCOM et centres hospitaliers :
+              du dossier patient aux statistiques sanitaires, avec une
+              application mobile qui fonctionne même sans connexion.
+            </p>
+            <ul className={styles.caseList}>
+              {DMPE_FEATURES.map((f) => (
+                <li key={f.title} className={f.highlight ? styles.caseHighlight : undefined}>
+                  <span className={styles.caseIcon}>{f.icon}</span>
+                  <span>
+                    <strong>{f.title}</strong>
+                    {f.desc}
+                  </span>
+                </li>
+              ))}
+            </ul>
+            <Link to="/projects" className="link-arrow">
+              Voir nos réalisations <ArrowIcon />
+            </Link>
+          </motion.div>
+
+          <motion.div
+            className={styles.caseVisual}
+            initial={{ opacity: 0, x: 32 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-60px' }}
+            transition={{ duration: 0.7 }}
+          >
+            <div className={`${styles.browser} ${styles.browserBack}`}>
+              <div className={styles.browserBar}><span /><span /><span /></div>
+              <img src={dmpeStats} alt="DMPe — statistiques des activités curatives par tranche d'âge" loading="lazy" decoding="async" />
+            </div>
+            <div className={`${styles.browser} ${styles.browserFront}`}>
+              <div className={styles.browserBar}><span /><span /><span /></div>
+              <img src={dmpeDossiers} alt="DMPe — liste des dossiers patients (données anonymisées)" loading="lazy" decoding="async" />
+            </div>
+            <div className={styles.offlineBadge}>
+              <span className={styles.offlineDot} />
+              <span>
+                <strong>Mode hors connexion</strong>
+                Synchronisation dès le retour du réseau
+              </span>
+            </div>
+          </motion.div>
         </div>
       </section>
 
