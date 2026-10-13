@@ -1,5 +1,6 @@
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
+import axelorLogo from '../assets/projects/axelor-logo.webp';
 
 export const projects = [
   {
@@ -14,6 +15,7 @@ export const projects = [
     title: 'Implémentation Axelor',
     sector: 'Secteur : Industrie',
     category: 'ERP',
+    logo: axelorLogo,
   },
   {
     id: 2,
