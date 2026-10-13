@@ -1,6 +1,6 @@
 .section {
   background: var(--light);
-  padding: 96px 5%;
+  padding: 56px 5% 96px;
 }
 
 .grid {
@@ -114,6 +114,10 @@
   .grid {
     grid-template-columns: 1fr;
     gap: 48px;
+  }
+  /* Sur mobile, le formulaire passe avant les coordonnées */
+  .grid > :last-child {
+    order: -1;
   }
 }
 

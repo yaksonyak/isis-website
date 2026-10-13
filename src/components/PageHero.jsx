@@ -30,7 +30,7 @@ export default function PageHero({ title, titleEm, subtitle, breadcrumb }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {title} {titleEm && <em>{titleEm}</em>}
+          {title}{title.endsWith('-') ? '' : ' '}{titleEm && <em>{titleEm}</em>}
         </motion.h1>
 
         {subtitle && (
