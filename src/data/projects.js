@@ -1,6 +1,7 @@
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
 import axelorLogo from '../assets/projects/axelor-logo.webp';
+import dolibarrLogo from '../assets/projects/dolibarr-logo.webp';
 
 export const projects = [
   {
@@ -25,6 +26,13 @@ export const projects = [
     image: gestionScolaire,
   },
   {
+    id: 5,
+    title: 'Intégration Dolibarr',
+    sector: 'Secteur : Commerce',
+    category: 'ERP',
+    logo: dolibarrLogo,
+  },
+  {
     id: 3,
     title: 'Audit de sécurité IT',
     sector: 'Secteur : Finance',
@@ -35,12 +43,6 @@ export const projects = [
     title: 'Portail client sur mesure',
     sector: 'Secteur : Services',
     category: 'Développement',
-  },
-  {
-    id: 5,
-    title: 'Intégration Dolibarr',
-    sector: 'Secteur : Commerce',
-    category: 'ERP',
   },
   {
     id: 6,

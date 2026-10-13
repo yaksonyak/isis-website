@@ -50,7 +50,7 @@ export default function Projects() {
                 <div className={styles.imgWrap}>
                   {p.logo ? (
                     <div className={styles.logoBox}>
-                      <img src={p.logo} alt={`Logo ${p.title.replace('Implémentation ', '')}`} loading="lazy" decoding="async" />
+                      <img src={p.logo} alt={`Logo ${p.title.replace(/^(Implémentation|Intégration) /, '')}`} loading="lazy" decoding="async" />
                     </div>
                   ) : p.image ? (
                     <img src={p.image} alt={`Capture d'écran — ${p.title}`} loading="lazy" decoding="async" className={styles.shot} />
