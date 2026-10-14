@@ -94,6 +94,48 @@ textarea {
   transform: translateY(0);
 }
 
+.submit:disabled {
+  opacity: .7;
+  cursor: wait;
+  transform: none;
+  box-shadow: none;
+}
+
+.invalid {
+  border-color: var(--red) !important;
+}
+
+.fieldError {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--red-dark);
+}
+
+.error {
+  background: #FFF1F1;
+  color: #B42318;
+  padding: 12px 16px;
+  border-radius: var(--r8);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 16px;
+  border: 1px solid #FFC9C9;
+}
+
+.error a {
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+.botcheck {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
 @media (max-width: 540px) {
   .row {
     grid-template-columns: 1fr;

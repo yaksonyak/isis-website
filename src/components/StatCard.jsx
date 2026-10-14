@@ -26,7 +26,7 @@ function AnimatedCounter({ target, duration = 1800 }) {
   return <span ref={ref}>{count}</span>;
 }
 
-export default function StatCard({ icon, value, suffix, label, delay = 0 }) {
+export default function StatCard({ icon, value, suffix, label }) {
   return (
     <div className={styles.stat}>
       <div className={styles.iconWrap}>

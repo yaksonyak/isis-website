@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Link, useNavigate } from 'react-router-dom';
+import { NavLink, Link, useLocation, useNavigate } from 'react-router-dom';
 import logo from '../assets/logos/logo-transparent.png';
 import styles from './Header.module.css';
 
@@ -16,6 +16,8 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const [lastPath, setLastPath] = useState(pathname);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
@@ -23,22 +25,19 @@ export default function Header() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
+  // Close mobile menu on route change (incl. browser back/forward)
+  if (pathname !== lastPath) {
+    setLastPath(pathname);
+    setMobileOpen(false);
+  }
+
   useEffect(() => {
-    setMobileOpen(false);
-    document.body.style.overflow = '';
-  }, []);
+    document.body.style.overflow = mobileOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileOpen]);
 
-  const toggleMobile = () => {
-    const next = !mobileOpen;
-    setMobileOpen(next);
-    document.body.style.overflow = next ? 'hidden' : '';
-  };
-
-  const closeMobile = () => {
-    setMobileOpen(false);
-    document.body.style.overflow = '';
-  };
+  const toggleMobile = () => setMobileOpen((open) => !open);
+  const closeMobile = () => setMobileOpen(false);
 
   const handleContact = () => {
     closeMobile();

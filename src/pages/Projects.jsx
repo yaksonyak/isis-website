@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
+import { Cover } from '../components/Illustrations';
 import { projects, projectCategories } from '../data/projects';
 import styles from './Projects.module.css';
-
-const BASE = 'https://images.unsplash.com';
-const HERO_IMG = `${BASE}/photo-1522202176988-66273c2fd55f?w=1400&q=85&fit=crop&crop=center&auto=format`;
 
 export default function Projects() {
   const [active, setActive] = useState('Tous');
@@ -20,7 +18,6 @@ export default function Projects() {
         title="Nos"
         titleEm="réalisations"
         subtitle="Des projets concrets menés par nos équipes pour des clients à travers l'Afrique de l'Ouest."
-        image={HERO_IMG}
         breadcrumb="Réalisations"
       />
 
@@ -51,12 +48,15 @@ export default function Projects() {
                 whileHover={{ y: -6 }}
               >
                 <div className={styles.imgWrap}>
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  {p.logo ? (
+                    <div className={styles.logoBox}>
+                      <img src={p.logo} alt={`Logo ${p.title.replace(/^(Implémentation|Intégration) /, '')}`} loading="lazy" decoding="async" />
+                    </div>
+                  ) : p.image ? (
+                    <img src={p.image} alt={`Capture d'écran — ${p.title}`} loading="lazy" decoding="async" className={styles.shot} />
+                  ) : (
+                    <Cover category={p.category} seed={p.id} label={p.title} />
+                  )}
                   <span className={styles.tag}>{p.category}</span>
                 </div>
                 <div className={styles.info}>

@@ -3,9 +3,6 @@ import PageHero from '../components/PageHero';
 import ContactForm from '../components/ContactForm';
 import styles from './Contact.module.css';
 
-const BASE = 'https://images.unsplash.com';
-const HERO_IMG = `${BASE}/photo-1556761175-4b46a572b786?w=1400&q=85&fit=crop&crop=center&auto=format`;
-
 const CONTACT_ITEMS = [
   {
     icon: (
@@ -24,7 +21,12 @@ const CONTACT_ITEMS = [
       </svg>
     ),
     label: 'Téléphone',
-    value: '+223 XX XXX XXX',
+    value: (
+      <>
+        <a href="tel:+22366614663">+223 66 61 46 63</a><br />
+        <a href="tel:+22376299328">+223 76 29 93 28</a>
+      </>
+    ),
   },
   {
     icon: (
@@ -34,7 +36,7 @@ const CONTACT_ITEMS = [
       </svg>
     ),
     label: 'Email',
-    value: 'contact@isis-consulting.com',
+    value: <a href="mailto:Commercial@isis-consulting.ml">Commercial@isis-consulting.ml</a>,
   },
   {
     icon: (
@@ -71,7 +73,6 @@ export default function Contact() {
         title="Contactez-"
         titleEm="nous"
         subtitle="Notre équipe est disponible pour répondre à toutes vos questions et vous accompagner dans vos projets."
-        image={HERO_IMG}
         breadcrumb="Contact"
       />
 

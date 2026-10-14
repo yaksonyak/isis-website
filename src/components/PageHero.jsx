@@ -1,18 +1,16 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { PatternBg } from './Illustrations';
 import styles from './PageHero.module.css';
 
-export default function PageHero({ title, titleEm, subtitle, image, breadcrumb }) {
+export default function PageHero({ title, titleEm, subtitle, breadcrumb }) {
   return (
     <section className={styles.hero}>
       <div className={styles.bg}>
-        <img
-          src={image}
-          alt={title}
-          loading="eager"
-          decoding="async"
-        />
         <div className={styles.overlay} />
+        <PatternBg className={styles.pattern} opacity={0.16} />
+        <span className={styles.orb} />
+        <span className={styles.orbRed} />
       </div>
 
       <div className={styles.inner}>
@@ -32,7 +30,7 @@ export default function PageHero({ title, titleEm, subtitle, image, breadcrumb }
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          {title} {titleEm && <em>{titleEm}</em>}
+          {title}{title.endsWith('-') ? '' : ' '}{titleEm && <em>{titleEm}</em>}
         </motion.h1>
 
         {subtitle && (

@@ -37,9 +37,10 @@ src/
 ├── components/
 │   ├── Header.jsx / .module.css     # Navigation sticky + menu mobile
 │   ├── Footer.jsx / .module.css     # Footer 4 colonnes
-│   ├── PageHero.jsx / .module.css   # Entête pages internes (photo + overlay)
+│   ├── PageHero.jsx / .module.css   # Entête pages internes (dégradé + motif)
 │   ├── ServiceCard.jsx / .module.css # Carte service (grid + detail)
 │   ├── StatCard.jsx / .module.css   # Compteur animé
+│   ├── Illustrations.jsx            # Illustrations SVG (dashboard, Bamako, couvertures)
 │   ├── PartnerSection.jsx / .module.css
 │   ├── TestimonialCard.jsx / .module.css
 │   ├── CTASection.jsx / .module.css
@@ -84,8 +85,29 @@ src/
 | `/blog` | Blog |
 | `/contact` | Contact |
 
-## Images
+## Visuels
 
-Les photos utilisent Unsplash CDN avec `crop=faces,center` pour un cadrage optimal.
-Pour personnaliser, remplacez les URLs dans `src/data/projects.js`, `src/data/blog.js`
-et les constantes `BASE + photo-ID` dans `Home.jsx`, `About.jsx`, etc.
+Le site n'utilise plus de photos de stock : les visuels sont des illustrations
+SVG aux couleurs ISIS (`src/components/Illustrations.jsx`) — tableau de bord
+ERP en FCFA, Bamako au bord du Niger (tour BCEAO, pont, pirogue), motifs
+inspirés du bogolan et couvertures générées par catégorie pour les
+réalisations et articles.
+
+Pour ajouter de vraies photos de l'équipe ou de vos projets à Bamako, placez-les
+dans `src/assets/` et importez-les dans les pages concernées.
+
+## Formulaire de contact (Web3Forms)
+
+Les messages du formulaire sont envoyés par [Web3Forms](https://web3forms.com)
+à **Commercial@isis-consulting.ml**.
+
+1. Sur web3forms.com, saisir Commercial@isis-consulting.ml : la clé d'accès
+   arrive par email.
+2. La renseigner, au choix :
+   - dans `src/config.js` (la clé est publique par conception) ;
+   - ou via la variable d'environnement `VITE_WEB3FORMS_KEY` (voir
+     `.env.example`), dans un fichier `.env` ou chez l'hébergeur.
+3. Relancer le build.
+
+Sans clé, le formulaire affiche une erreur invitant à écrire directement à
+l'adresse email. Un champ piège invisible filtre les robots.

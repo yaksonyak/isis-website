@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
+import { Cover } from '../components/Illustrations';
 import { articles, blogCategories } from '../data/blog';
 import styles from './Blog.module.css';
-
-const BASE = 'https://images.unsplash.com';
-const HERO_IMG = `${BASE}/photo-1573496799652-408c2ac9fe98?w=1400&q=85&fit=crop&crop=faces,center&auto=format`;
 
 export default function Blog() {
   const [active, setActive] = useState('Tous');
@@ -20,7 +18,6 @@ export default function Blog() {
         title="Blog /"
         titleEm="Actualités"
         subtitle="Articles techniques, bonnes pratiques IT et actualités de la transformation digitale en Afrique."
-        image={HERO_IMG}
         breadcrumb="Blog"
       />
 
@@ -51,12 +48,7 @@ export default function Blog() {
                 whileHover={{ y: -6 }}
               >
                 <div className={styles.imgWrap}>
-                  <img
-                    src={a.image}
-                    alt={a.title}
-                    loading="lazy"
-                    decoding="async"
-                  />
+                  <Cover category={a.category} seed={a.id} label={a.title} />
                   <span className={styles.tag}>{a.category}</span>
                 </div>
                 <div className={styles.body}>
