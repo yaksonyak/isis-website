@@ -1,4 +1,3 @@
-import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
 import axelorLogo from '../assets/projects/axelor-logo.webp';
 import dolibarrLogo from '../assets/projects/dolibarr-logo.webp';
 
@@ -9,13 +8,6 @@ export const projects = [
     sector: 'Secteur : Industrie',
     category: 'ERP',
     logo: axelorLogo,
-  },
-  {
-    id: 2,
-    title: 'Application de gestion scolaire',
-    sector: 'Secteur : Éducation',
-    category: 'Développement',
-    image: gestionScolaire,
   },
   {
     id: 5,

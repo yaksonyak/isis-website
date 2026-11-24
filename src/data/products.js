@@ -2,6 +2,9 @@ import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
 import agristockProduits from '../assets/projects/agristock-produits.webp';
 import agristockConnexion from '../assets/projects/agristock-connexion.webp';
+import pharmaDashboard from '../assets/projects/isis-pharma-tableau-de-bord.webp';
+import pharmaConnexion from '../assets/projects/isis-pharma-connexion.webp';
+import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
 
 /*
  * Logiciels conçus par ISIS Consulting.
@@ -153,6 +156,93 @@ export const products = [
     cta: {
       title: 'Envie de voir AgriStock en action ?',
       subtitle: 'Contactez-nous pour une démonstration et une mise en route dans votre magasin.',
+    },
+  },
+  {
+    slug: 'isis-pharma',
+    name: 'ISIS Pharma',
+    title: "ISIS Pharma — gestion d'officine",
+    sector: 'Pharmacie',
+    platform: 'Stock, caisse, comptabilité OHADA',
+    tagline: "La gestion d'officine : stock, caisse et comptabilité OHADA.",
+    headline: ['Toute la pharmacie', 'dans un seul outil'],
+    description:
+      "ISIS Pharma est un logiciel de gestion d'officine. Il réunit la vente au comptoir, le suivi du stock par lots avec les dates de péremption, les achats et la comptabilité OHADA, avec un tableau de bord pour suivre l'activité de la pharmacie.",
+    badges: ["Gestion d'officine", 'Suivi des lots', 'Comptabilité OHADA', 'Montants en FCFA'],
+    points: ['Terminal de vente', 'Stock & lots', 'Alertes de péremption', 'Comptabilité OHADA'],
+    theme: { accent: '#0F766E', dark: '#0B5A54', light: '#DDF3F0', deep: '#14304D' },
+    screens: [
+      { src: pharmaDashboard, alt: "ISIS Pharma — tableau de bord : chiffre d'affaires, valeur du stock, caisses ouvertes et alertes de péremption", caption: 'Tableau de bord' },
+      { src: pharmaConnexion, alt: 'ISIS Pharma — écran de connexion', caption: 'Écran de connexion' },
+    ],
+    features: [
+      {
+        icon: 'cart',
+        title: 'Caisse et ventes',
+        items: ['Terminal de vente', 'Historique des ventes', 'Sessions de caisse', 'Assureurs et tiers payants'],
+      },
+      {
+        icon: 'box',
+        title: 'Stock et achats',
+        items: ['Produits et étiquettes code-barres', 'Stock suivi par lots', 'Inventaire tournant', 'Achats et réceptions'],
+      },
+      {
+        icon: 'chart',
+        title: 'Tableau de bord et alertes',
+        items: [
+          "Chiffre d'affaires du jour et du mois",
+          'Valeur du stock et caisses ouvertes',
+          'Produits sous le seuil et lots périmés',
+          'Péremptions à moins de 90 jours',
+        ],
+      },
+      {
+        icon: 'receipt',
+        title: 'Comptabilité OHADA',
+        items: ['Comptabilité intégrée, au référentiel OHADA', 'Suivi des achats avec reste à payer'],
+      },
+    ],
+    cta: {
+      title: 'Envie de voir ISIS Pharma en action ?',
+      subtitle: 'Contactez-nous pour une démonstration dans votre pharmacie.',
+    },
+  },
+  {
+    slug: 'gestion-scolaire',
+    name: 'Gestion scolaire',
+    title: 'Application de gestion scolaire',
+    sector: 'Éducation',
+    platform: 'Scolarité, facturation, comptabilité',
+    tagline: "L'application de gestion pour les établissements scolaires.",
+    headline: ["De l'inscription des élèves", "au budget de l'école"],
+    description:
+      "Une application de gestion pour les établissements scolaires : inscriptions, activité scolaire et enseignants d'un côté, facturation, dépenses, comptabilité et budget de l'autre, avec un tableau de bord pour suivre les effectifs.",
+    badges: ['Établissements scolaires', 'Scolarité', 'Finances', 'Tableau de bord'],
+    points: ['Inscriptions', 'Facturation', 'Comptabilité', 'Gestion budgétaire'],
+    theme: { accent: '#5B5BD6', dark: '#4343B0', light: '#EBEBFB', deep: '#23234A' },
+    screens: [
+      { src: gestionScolaire, alt: "Application de gestion scolaire — tableau de bord : nombre d'élèves par sexe", caption: 'Tableau de bord' },
+    ],
+    features: [
+      {
+        icon: 'users',
+        title: 'Scolarité',
+        items: ['Inscriptions', 'Activité scolaire', 'Enseignants', 'Messages et documents'],
+      },
+      {
+        icon: 'receipt',
+        title: 'Finances',
+        items: ['Facturation', 'Dépenses', 'Comptabilité'],
+      },
+      {
+        icon: 'chart',
+        title: 'Pilotage',
+        items: ['Gestion budgétaire', 'Prévisions de trésorerie', "Tableau de bord : élèves par sexe, inscriptions par classe"],
+      },
+    ],
+    cta: {
+      title: "Envie de voir l'application en action ?",
+      subtitle: 'Contactez-nous pour une démonstration dans votre établissement.',
     },
   },
 ];
