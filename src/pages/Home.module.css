@@ -319,8 +319,124 @@
 }
 
 /* ── RÉALISATION PHARE (DMPe) ── */
-.caseSection {
+/* ── NOS LOGICIELS ── */
+.softSection {
   background: #fff;
+  padding: 96px 5%;
+}
+
+.softGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 22px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.softGrid > * {
+  display: flex;
+}
+
+.softCard {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--r20);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--t), box-shadow var(--t), border-color var(--t);
+}
+
+.softCard:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 40%, #fff);
+  box-shadow: 0 2px 4px rgba(15,23,42,.03), 0 30px 56px -26px color-mix(in srgb, var(--accent) 60%, transparent);
+}
+
+.softShot {
+  display: block;
+  padding: 16px 16px 0;
+  background: linear-gradient(160deg, var(--accent-light), #fff);
+  border-bottom: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.softShot img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: left top;
+  border-radius: 10px 10px 0 0;
+  border: 1px solid var(--line);
+  border-bottom: none;
+  box-shadow: 0 12px 24px -12px rgba(15,23,42,.3);
+  transition: transform .4s ease;
+  transform-origin: top center;
+}
+
+.softCard:hover .softShot img {
+  transform: scale(1.04);
+}
+
+.softBody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 22px 22px 24px;
+}
+
+.softSector {
+  align-self: flex-start;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  background: var(--accent-light);
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-bottom: 12px;
+}
+
+.softBody strong {
+  font-size: 19px;
+  font-weight: 700;
+  color: var(--dark);
+  letter-spacing: -0.02em;
+  margin-bottom: 8px;
+}
+
+.softTagline {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.65;
+  margin-bottom: 18px;
+}
+
+.softMore {
+  margin-top: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--accent-dark);
+  transition: gap var(--t);
+}
+
+.softCard:hover .softMore {
+  gap: 10px;
+}
+
+.softAll {
+  text-align: center;
+  margin-top: 44px;
+}
+
+.caseSection {
+  background: var(--light);
   padding: 104px 5%;
   overflow: hidden;
 }
@@ -417,7 +533,7 @@
   position: absolute;
   inset: -6% -12% 4% 6%;
   border-radius: 40px;
-  background: linear-gradient(135deg, #E3F2FD, #F5FAFF 60%, #FFF1F1);
+  background: linear-gradient(135deg, #D6EAFB, #EAF4FD 60%, #FFE9E9);
   transform: rotate(-2deg);
   z-index: 0;
 }
@@ -586,6 +702,9 @@
   .servicesGrid > :nth-child(5) {
     grid-column: span 2;
   }
+  .softGrid {
+    grid-template-columns: 1fr 1fr;
+  }
   .statsSection {
     padding: 48px 5%;
   }
@@ -643,9 +762,11 @@
   .servicesGrid > :nth-child(5) {
     grid-column: span 1;
   }
-  .aboutPoints {
+  .aboutPoints,
+  .softGrid {
     grid-template-columns: 1fr;
   }
+  .softSection,
   .aboutSection,
   .servicesSection,
   .caseSection,

@@ -9,6 +9,7 @@ import CTASection from '../components/CTASection';
 import PartnerSection from '../components/PartnerSection';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
+import { products } from '../data/products';
 import { DashboardArt, BamakoArt, PatternBg } from '../components/Illustrations';
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
@@ -209,6 +210,48 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── NOS LOGICIELS ── */}
+      <section className={styles.softSection}>
+        <div className="section-eyebrow">CONÇUS PAR ISIS CONSULTING</div>
+        <h2 className="section-title">Nos <em>logiciels</em></h2>
+        <p className="section-sub">
+          Des produits développés par nos équipes pour la santé, l'agriculture,
+          la pharmacie et l'éducation.
+        </p>
+        <div className={styles.softGrid}>
+          {products.map((p, i) => (
+            <motion.div
+              key={p.slug}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-40px' }}
+              transition={{ duration: 0.55, delay: i * 0.08 }}
+            >
+              <Link
+                to={`/logiciels/${p.slug}`}
+                className={styles.softCard}
+                style={{ '--accent': p.theme.accent, '--accent-dark': p.theme.dark, '--accent-light': p.theme.light }}
+              >
+                <span className={styles.softShot}>
+                  <img src={p.screens[0].src} alt={p.screens[0].alt} loading="lazy" decoding="async" />
+                </span>
+                <span className={styles.softBody}>
+                  <span className={styles.softSector}>{p.sector}</span>
+                  <strong>{p.name}</strong>
+                  <span className={styles.softTagline}>{p.tagline}</span>
+                  <span className={styles.softMore}>Découvrir <ArrowIcon /></span>
+                </span>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+        <div className={styles.softAll}>
+          <Link to="/projects" className="btn-outline">
+            Toutes nos réalisations <ArrowIcon />
+          </Link>
+        </div>
+      </section>
+
       {/* ── RÉALISATION PHARE : DMPe ── */}
       <section className={styles.caseSection}>
         <div className={styles.caseGrid}>
@@ -219,7 +262,7 @@ export default function Home() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7 }}
           >
-            <div className={styles.splitEye}>NOTRE LOGICIEL · SANTÉ</div>
+            <div className={styles.splitEye}>LOGICIEL PHARE · SANTÉ</div>
             <h2>
               DMPe — le dossier médical patient <em>électronique</em>
             </h2>
