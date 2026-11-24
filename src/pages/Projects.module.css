@@ -130,6 +130,21 @@
   border-radius: 20px;
 }
 
+@media (min-width: 901px) {
+  .reverse {
+    grid-template-columns: 1fr 1.25fr;
+  }
+  .reverse .imgWrap {
+    order: 2;
+    border-right: none;
+    border-left: 1px solid var(--line);
+  }
+  .reverse .tag {
+    left: auto;
+    right: 12px;
+  }
+}
+
 @media (max-width: 900px) {
   .featured { grid-template-columns: 1fr; }
   .featured .imgWrap { min-height: 0; height: 240px; border-right: none; }
@@ -177,4 +192,19 @@
 
 .card:hover .logoBox img {
   transform: scale(1.05);
+}
+
+.more {
+  margin-top: 14px;
+}
+
+/* Toute la carte est cliquable quand elle mène à une page */
+.card {
+  position: relative;
+}
+
+.more::after {
+  content: '';
+  position: absolute;
+  inset: 0;
 }

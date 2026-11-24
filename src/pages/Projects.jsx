@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
 import CTASection from '../components/CTASection';
@@ -40,7 +41,7 @@ export default function Projects() {
             {filtered.map((p, i) => (
               <motion.div
                 key={p.id}
-                className={`${styles.card} ${p.featured ? styles.featured : ''}`}
+                className={`${styles.card} ${p.featured ? styles.featured : ''} ${p.reverse ? styles.reverse : ''}`}
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -61,7 +62,7 @@ export default function Projects() {
                   <span className={styles.tag}>{p.category}</span>
                 </div>
                 <div className={styles.info}>
-                  {p.featured && <span className={styles.featuredEye}>Réalisation phare</span>}
+                  {p.featured && <span className={styles.featuredEye}>{p.eyebrow || 'Réalisation phare'}</span>}
                   <h3>{p.title}</h3>
                   <p>{p.sector}</p>
                   {p.description && <p className={styles.desc}>{p.description}</p>}
@@ -69,6 +70,11 @@ export default function Projects() {
                     <ul className={styles.points}>
                       {p.points.map((pt) => <li key={pt}>{pt}</li>)}
                     </ul>
+                  )}
+                  {p.link && (
+                    <Link to={p.link} className={`link-arrow ${styles.more}`}>
+                      {p.linkLabel} <span aria-hidden="true">→</span>
+                    </Link>
                   )}
                 </div>
               </motion.div>

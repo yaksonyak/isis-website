@@ -8,6 +8,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
+import AgriStock from './pages/AgriStock';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -30,6 +31,7 @@ function AppContent() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/agristock" element={<AgriStock />} />
         {/* Fallback */}
         <Route path="*" element={<Home />} />
       </Routes>

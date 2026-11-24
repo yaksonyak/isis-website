@@ -2,6 +2,7 @@ import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
 import axelorLogo from '../assets/projects/axelor-logo.webp';
 import dolibarrLogo from '../assets/projects/dolibarr-logo.webp';
+import agristock from '../assets/projects/agristock-connexion.webp';
 
 export const projects = [
   {
@@ -13,6 +14,20 @@ export const projects = [
     featured: true,
     description: "Plateforme complète pour les CSCOM et centres hospitaliers : du dossier patient aux statistiques sanitaires, avec une application mobile qui fonctionne sans connexion.",
     points: ['Dossiers patients', 'Statistiques sanitaires', 'Pharmacie & comptabilité', 'Mobile hors connexion'],
+  },
+  {
+    id: 8,
+    title: 'AgriStock — gestion de magasin agricole',
+    sector: 'Secteur : Agriculture · Logiciel Windows hors connexion',
+    category: 'Développement',
+    image: agristock,
+    featured: true,
+    reverse: true,
+    eyebrow: 'Notre logiciel',
+    description: "Logiciel Windows qui gère le stock, les ventes et les comptes d'un magasin de produits agricoles. En français, en FCFA, et sans connexion internet.",
+    points: ['Caisse & factures PDF', 'Ventes à crédit', 'Stock & inventaires', 'Rapports & export Excel'],
+    link: '/agristock',
+    linkLabel: 'Découvrir AgriStock',
   },
   {
     id: 1,
