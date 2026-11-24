@@ -219,7 +219,7 @@ export default function Home() {
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7 }}
           >
-            <div className={styles.splitEye}>RÉALISATION PHARE · SANTÉ</div>
+            <div className={styles.splitEye}>NOTRE LOGICIEL · SANTÉ</div>
             <h2>
               DMPe — le dossier médical patient <em>électronique</em>
             </h2>
@@ -239,8 +239,8 @@ export default function Home() {
                 </li>
               ))}
             </ul>
-            <Link to="/projects" className="link-arrow">
-              Voir nos réalisations <ArrowIcon />
+            <Link to="/logiciels/dmpe" className="link-arrow">
+              Découvrir le DMPe <ArrowIcon />
             </Link>
           </motion.div>
 

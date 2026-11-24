@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { useEffect } from 'react';
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -8,7 +8,7 @@ import Services from './pages/Services';
 import Projects from './pages/Projects';
 import Blog from './pages/Blog';
 import Contact from './pages/Contact';
-import AgriStock from './pages/AgriStock';
+import Product from './pages/Product';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -31,7 +31,8 @@ function AppContent() {
         <Route path="/projects" element={<Projects />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/agristock" element={<AgriStock />} />
+        <Route path="/logiciels/:slug" element={<Product />} />
+        <Route path="/agristock" element={<Navigate to="/logiciels/agristock" replace />} />
         {/* Fallback */}
         <Route path="*" element={<Home />} />
       </Routes>

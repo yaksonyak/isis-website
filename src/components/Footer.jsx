@@ -42,7 +42,7 @@ export default function Footer() {
             <li><Link to="/services">Audit informatique</Link></li>
             <li><Link to="/services">Conseil IT</Link></li>
             <li><Link to="/services">Formation</Link></li>
-            <li><Link to="/agristock">Logiciel AgriStock</Link></li>
+            <li><Link to="/projects">Nos logiciels</Link></li>
           </ul>
         </div>
 
