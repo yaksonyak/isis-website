@@ -10,6 +10,9 @@ export const projects = [
     sector: 'Secteur : Santé · Web & mobile hors connexion',
     category: 'Développement',
     image: dmpeDossiers,
+    featured: true,
+    description: "Plateforme complète pour les CSCOM et centres hospitaliers : du dossier patient aux statistiques sanitaires, avec une application mobile qui fonctionne sans connexion.",
+    points: ['Dossiers patients', 'Statistiques sanitaires', 'Pharmacie & comptabilité', 'Mobile hors connexion'],
   },
   {
     id: 1,

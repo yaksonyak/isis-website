@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
+import CTASection from '../components/CTASection';
 import { Cover } from '../components/Illustrations';
 import { projects, projectCategories } from '../data/projects';
 import styles from './Projects.module.css';
@@ -39,7 +40,7 @@ export default function Projects() {
             {filtered.map((p, i) => (
               <motion.div
                 key={p.id}
-                className={styles.card}
+                className={`${styles.card} ${p.featured ? styles.featured : ''}`}
                 layout
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -60,18 +61,33 @@ export default function Projects() {
                   <span className={styles.tag}>{p.category}</span>
                 </div>
                 <div className={styles.info}>
+                  {p.featured && <span className={styles.featuredEye}>Réalisation phare</span>}
                   <h3>{p.title}</h3>
                   <p>{p.sector}</p>
+                  {p.description && <p className={styles.desc}>{p.description}</p>}
+                  {p.points && (
+                    <ul className={styles.points}>
+                      {p.points.map((pt) => <li key={pt}>{pt}</li>)}
+                    </ul>
+                  )}
                 </div>
               </motion.div>
             ))}
           </AnimatePresence>
         </motion.div>
 
-        <div className="text-center" style={{ marginTop: 48 }}>
-          <button className="btn-outline">Voir tous les projets</button>
-        </div>
+        {filtered.length === 0 && (
+          <div className="empty-state">
+            <strong>Bientôt disponible</strong>
+            Nos missions de {active.toLowerCase()} seront présentées ici prochainement.
+          </div>
+        )}
       </section>
+
+      <CTASection
+        title="Un projet similaire en tête ?"
+        subtitle="Décrivez-nous votre besoin : nous revenons vers vous avec une proposition adaptée."
+      />
     </main>
   );
 }

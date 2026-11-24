@@ -1,7 +1,25 @@
 .footer {
+  position: relative;
   background: var(--dark);
   padding: 72px 5% 32px;
   color: rgba(255, 255, 255, 0.65);
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--red));
+}
+
+.grid,
+.bottom {
+  max-width: 1296px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .grid {
@@ -14,22 +32,24 @@
 .brand {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
 }
 
 .logo {
-  height: 40px;
+  height: 46px;
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1);
-  margin-bottom: 14px;
+  margin-bottom: 18px;
   background: transparent;
 }
 
 .tagline {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.4);
-  margin-bottom: 22px;
-  line-height: 1.6;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 24px;
+  line-height: 1.7;
+  max-width: 320px;
 }
 
 .socials {
@@ -46,10 +66,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 13px;
-  font-weight: 700;
-  color: rgba(255, 255, 255, 0.7);
-  transition: background var(--t), color var(--t), transform var(--t);
+  color: rgba(255, 255, 255, 0.75);
+  transition: background var(--t), color var(--t), transform var(--t), border-color var(--t);
+}
+
+.social svg {
+  width: 17px;
+  height: 17px;
 }
 
 .social:hover {
@@ -75,14 +98,14 @@
 
 .col ul li a,
 .col ul li span {
-  font-size: 13px;
-  color: rgba(255, 255, 255, 0.5);
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.62);
   transition: color var(--t), padding-left var(--t);
   display: inline-block;
 }
 
 .col ul li a:hover {
-  color: var(--blue);
+  color: #fff;
   padding-left: 4px;
 }
 
@@ -103,7 +126,7 @@
 }
 
 .legal a {
-  color: rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.45);
   font-size: 12px;
   transition: color var(--t);
 }

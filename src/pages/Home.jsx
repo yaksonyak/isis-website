@@ -9,7 +9,7 @@ import CTASection from '../components/CTASection';
 import PartnerSection from '../components/PartnerSection';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
-import { DashboardArt, BamakoArt } from '../components/Illustrations';
+import { DashboardArt, BamakoArt, PatternBg } from '../components/Illustrations';
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
 import styles from './Home.module.css';
@@ -72,7 +72,7 @@ const DMPE_FEATURES = [
 
 const STATS = [
   {
-    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 16l4-8 4 8"/><path d="M9 12h6"/></svg>,
+    icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><path d="M2 13h20"/></svg>,
     value: 50, suffix: '+', label: 'Projets réalisés',
   },
   {
@@ -117,7 +117,7 @@ export default function Home() {
           </p>
           <div className={styles.heroBtns}>
             <button className="btn-red" onClick={() => navigate('/contact')}>
-              Demander un devis
+              Demander un devis <ArrowIcon />
             </button>
             <button className="btn-outline" onClick={() => navigate('/services')}>
               Découvrir nos services
@@ -173,6 +173,11 @@ export default function Home() {
               l'Ouest pour accompagner les entreprises dans le développement
               logiciel, l'intégration ERP, l'audit IT, le conseil et la formation.
             </p>
+            <ul className={styles.aboutPoints}>
+              {['Développement sur mesure', 'Intégration ERP', 'Audit & conseil IT', 'Formation des équipes'].map((t) => (
+                <li key={t}><span className={styles.proofDot} />{t}</li>
+              ))}
+            </ul>
             <Link to="/about" className="link-arrow">
               En savoir plus <ArrowIcon />
             </Link>
@@ -199,7 +204,7 @@ export default function Home() {
         </p>
         <div className={styles.servicesGrid}>
           {services.map((s, i) => (
-            <ServiceCard key={s.id} service={s} delay={i * 0.08} />
+            <ServiceCard key={s.id} service={s} delay={i * 0.08} index={i} />
           ))}
         </div>
       </section>
@@ -216,8 +221,7 @@ export default function Home() {
           >
             <div className={styles.splitEye}>RÉALISATION PHARE · SANTÉ</div>
             <h2>
-              DMPe — le dossier médical<br />
-              patient <em>électronique</em>
+              DMPe — le dossier médical patient <em>électronique</em>
             </h2>
             <p>
               Une plateforme complète pour les CSCOM et centres hospitaliers :
@@ -268,6 +272,7 @@ export default function Home() {
 
       {/* ── STATS ── */}
       <section className={styles.statsSection}>
+        <PatternBg className={styles.statsPattern} opacity={0.07} />
         <div className={styles.statsBox}>
           {STATS.map((s, i) => (
             <StatCard key={i} {...s} delay={i * 0.1} />
