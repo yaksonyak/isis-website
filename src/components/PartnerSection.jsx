@@ -2,39 +2,35 @@ import { motion } from 'framer-motion';
 import styles from './PartnerSection.module.css';
 
 const PARTNERS = [
-  { name: 'AXELOR', style: { color: '#1E88E5', fontSize: '22px' }, highlight: { color: '#FF4D4F' }, highlightChar: 'L' },
-  { name: 'Dolibarr', style: { color: '#2196F3', fontSize: '22px' } },
-  { name: 'Java', style: { color: '#E65100', fontSize: '20px' } },
-  { name: 'Spring', style: { color: '#6db33f', fontSize: '20px' } },
-  { name: 'Angular', style: { color: '#DD0031', fontSize: '20px' } },
+  { name: 'Axelor', role: 'ERP open source', color: '#1E88E5' },
+  { name: 'Dolibarr', role: 'ERP & CRM', color: '#263C5C' },
+  { name: 'Java', role: 'Back-end', color: '#E65100' },
+  { name: 'Spring Boot', role: 'Framework', color: '#6DB33F' },
+  { name: 'Angular', role: 'Front-end', color: '#DD0031' },
+  { name: 'Flutter', role: 'Mobile', color: '#0468D7' },
 ];
 
-export default function PartnerSection({ eyebrow = 'ILS NOUS FONT CONFIANCE' }) {
+export default function PartnerSection({ eyebrow = 'NOS TECHNOLOGIES & PARTENAIRES' }) {
   return (
     <section className={styles.section}>
       <div className={styles.eyebrow}>{eyebrow}</div>
-      <motion.div
+      <motion.ul
         className={styles.logos}
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
+        initial={{ opacity: 0, y: 16 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
         {PARTNERS.map((p) => (
-          <motion.div
-            key={p.name}
-            className={styles.logo}
-            style={{ ...p.style, fontWeight: 800 }}
-            whileHover={{ opacity: 0.9, scale: 1.05 }}
-          >
-            {p.name === 'AXELOR' ? (
-              <>AXE<span style={{ color: '#FF4D4F' }}>L</span>ØR</>
-            ) : (
-              p.name
-            )}
-          </motion.div>
+          <li key={p.name} className={styles.logo} style={{ '--c': p.color }}>
+            <span className={styles.dot} />
+            <span>
+              <strong>{p.name}</strong>
+              <small>{p.role}</small>
+            </span>
+          </li>
         ))}
-      </motion.div>
+      </motion.ul>
     </section>
   );
 }

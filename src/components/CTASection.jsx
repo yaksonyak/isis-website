@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { PatternBg } from './Illustrations';
 import styles from './CTASection.module.css';
 
 const ArrowIcon = () => (
@@ -9,42 +10,43 @@ const ArrowIcon = () => (
   </svg>
 );
 
+const PhoneIcon = () => (
+  <svg width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24">
+    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.99 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.9 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9a16 16 0 0 0 6.91 6.91l1.09-1.08a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z" />
+  </svg>
+);
+
 export default function CTASection({
   title = "Prêt à démarrer votre projet ?",
   subtitle = "Parlons de vos besoins et construisons ensemble votre succès en Afrique de l'Ouest.",
   btnLabel = "Nous contacter",
 }) {
-  const navigate = useNavigate();
-
   return (
     <section className={styles.cta}>
-      <motion.h2
-        initial={{ opacity: 0, y: 20 }}
+      <motion.div
+        className={styles.card}
+        initial={{ opacity: 0, y: 24 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        viewport={{ once: true, margin: '-60px' }}
         transition={{ duration: 0.6 }}
       >
-        {title}
-      </motion.h2>
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.1 }}
-      >
-        {subtitle}
-      </motion.p>
-      <motion.button
-        className={styles.btn}
-        onClick={() => navigate('/contact')}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6, delay: 0.2 }}
-        whileHover={{ y: -2, boxShadow: '0 8px 32px rgba(0,0,0,.2)' }}
-      >
-        {btnLabel} <ArrowIcon />
-      </motion.button>
+        <PatternBg className={styles.pattern} opacity={0.14} />
+        <span className={styles.orb} />
+        <span className={styles.orbRed} />
+
+        <div className={styles.text}>
+          <h2>{title}</h2>
+          <p>{subtitle}</p>
+        </div>
+        <div className={styles.actions}>
+          <Link to="/contact" className={styles.btn}>
+            {btnLabel} <ArrowIcon />
+          </Link>
+          <a href="tel:+22366614663" className={styles.phone}>
+            <PhoneIcon /> +223 66 61 46 63
+          </a>
+        </div>
+      </motion.div>
     </section>
   );
 }

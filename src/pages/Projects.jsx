@@ -1,8 +1,11 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
+import CTASection from '../components/CTASection';
 import { Cover } from '../components/Illustrations';
 import { projects, projectCategories } from '../data/projects';
+import { products } from '../data/products';
 import styles from './Projects.module.css';
 
 export default function Projects() {
@@ -17,11 +20,56 @@ export default function Projects() {
       <PageHero
         title="Nos"
         titleEm="réalisations"
-        subtitle="Des projets concrets menés par nos équipes pour des clients à travers l'Afrique de l'Ouest."
+        subtitle="Les logiciels que nous concevons et les missions menées pour nos clients à travers l'Afrique de l'Ouest."
         breadcrumb="Réalisations"
       />
 
+      {/* ── LOGICIELS ISIS CONSULTING ── */}
+      <section className={styles.productsSection}>
+        <div className="section-eyebrow">CONÇUS PAR ISIS CONSULTING</div>
+        <h2 className="section-title">Nos <em>logiciels</em></h2>
+        <p className="section-sub">
+          Des produits développés par nos équipes, pensés pour le terrain.
+        </p>
+
+        <div className={styles.products}>
+          {products.map((p, i) => (
+            <motion.article
+              key={p.slug}
+              className={`${styles.card} ${styles.featured} ${i % 2 ? styles.reverse : ''}`}
+              style={{ '--accent': p.theme.accent, '--accent-dark': p.theme.dark, '--accent-light': p.theme.light }}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-60px' }}
+              transition={{ duration: 0.55 }}
+            >
+              <div className={styles.imgWrap}>
+                <img src={p.screens[0].src} alt={p.screens[0].alt} loading="lazy" decoding="async" className={styles.shot} />
+              </div>
+              <div className={styles.info}>
+                <span className={styles.featuredEye}>{p.sector} · {p.platform}</span>
+                <h3>{p.title}</h3>
+                <p className={styles.desc}>{p.description}</p>
+                <ul className={styles.points}>
+                  {p.points.map((pt) => <li key={pt}>{pt}</li>)}
+                </ul>
+                <Link to={`/logiciels/${p.slug}`} className={`link-arrow ${styles.more}`}>
+                  Découvrir {p.name} <span aria-hidden="true">→</span>
+                </Link>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </section>
+
+      {/* ── MISSIONS CLIENTS ── */}
       <section className={styles.section}>
+        <div className="section-eyebrow">POUR NOS CLIENTS</div>
+        <h2 className="section-title">Missions <em>réalisées</em></h2>
+        <p className="section-sub">
+          Intégration ERP, développement sur mesure et audit.
+        </p>
+
         <div className="filter-bar">
           {projectCategories.map(cat => (
             <button
@@ -68,10 +116,18 @@ export default function Projects() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="text-center" style={{ marginTop: 48 }}>
-          <button className="btn-outline">Voir tous les projets</button>
-        </div>
+        {filtered.length === 0 && (
+          <div className="empty-state">
+            <strong>Bientôt disponible</strong>
+            Nos missions de {active.toLowerCase()} seront présentées ici prochainement.
+          </div>
+        )}
       </section>
+
+      <CTASection
+        title="Un projet similaire en tête ?"
+        subtitle="Décrivez-nous votre besoin : nous revenons vers vous avec une proposition adaptée."
+      />
     </main>
   );
 }

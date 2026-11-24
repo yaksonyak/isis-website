@@ -5,12 +5,13 @@ import { BamakoArt } from '../components/Illustrations';
 import styles from './About.module.css';
 
 
-const FadeIn = ({ children, delay = 0, direction = 'up' }) => {
+const FadeIn = ({ children, delay = 0, direction = 'up', className }) => {
   const initial = direction === 'left' ? { opacity: 0, x: -32 }
     : direction === 'right' ? { opacity: 0, x: 32 }
     : { opacity: 0, y: 28 };
   return (
     <motion.div
+      className={className}
       initial={initial}
       whileInView={{ opacity: 1, x: 0, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
@@ -79,7 +80,7 @@ export default function About() {
             { icon: <svg fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" /></svg>, title: 'Notre mission', desc: 'Fournir des solutions IT innovantes et performantes pour améliorer la productivité et la compétitivité de nos clients africains.' },
             { icon: <svg fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2" /></svg>, title: 'Nos valeurs', desc: 'Excellence, Innovation, Engagement et Intégrité sont les piliers de toutes nos actions et décisions.' },
           ].map((item, i) => (
-            <FadeIn key={item.title} delay={i * 0.1}>
+            <FadeIn key={item.title} delay={i * 0.1} className={styles.cell}>
               <div className={styles.vmvCard}>
                 <div className={styles.vmvIcon}>{item.icon}</div>
                 <h3>{item.title}</h3>
@@ -92,10 +93,11 @@ export default function About() {
 
       {/* ── VALEURS FONDAMENTALES ── */}
       <section className={styles.valeursSection}>
+        <div className="section-eyebrow">CE QUI NOUS GUIDE</div>
         <h2 className="section-title">Nos <em>valeurs</em> fondamentales</h2>
         <div className={styles.valeursGrid}>
           {VALEURS.map((v, i) => (
-            <FadeIn key={v.title} delay={i * 0.1}>
+            <FadeIn key={v.title} delay={i * 0.1} className={styles.cell}>
               <motion.div
                 className={styles.valeurItem}
                 whileHover={{ y: -4, boxShadow: '0 12px 40px rgba(0,0,0,.1)' }}

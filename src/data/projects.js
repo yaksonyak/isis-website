@@ -1,29 +1,13 @@
-import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
-import gestionScolaire from '../assets/projects/gestion-scolaire.webp';
 import axelorLogo from '../assets/projects/axelor-logo.webp';
 import dolibarrLogo from '../assets/projects/dolibarr-logo.webp';
 
 export const projects = [
-  {
-    id: 7,
-    title: 'DMPe — Dossier Médical Patient électronique',
-    sector: 'Secteur : Santé · Web & mobile hors connexion',
-    category: 'Développement',
-    image: dmpeDossiers,
-  },
   {
     id: 1,
     title: 'Implémentation Axelor',
     sector: 'Secteur : Industrie',
     category: 'ERP',
     logo: axelorLogo,
-  },
-  {
-    id: 2,
-    title: 'Application de gestion scolaire',
-    sector: 'Secteur : Éducation',
-    category: 'Développement',
-    image: gestionScolaire,
   },
   {
     id: 5,

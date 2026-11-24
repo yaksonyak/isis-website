@@ -12,7 +12,27 @@
   margin: 0 auto;
 }
 
+.cell {
+  display: flex;
+}
+
+.cell > * {
+  flex: 1;
+}
+
+.eye::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  opacity: .45;
+}
+
 .eye {
+  display: flex;
+  align-items: center;
+  gap: 12px;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 3px;
@@ -42,7 +62,7 @@
 }
 
 .corpWrap {
-  border-radius: var(--r20);
+  border-radius: 28px;
   overflow: hidden;
   box-shadow: var(--shadow-lg);
 }
@@ -72,15 +92,27 @@
 .vmvCard {
   background: #fff;
   border-radius: var(--r14);
-  padding: 36px 28px;
-  border: 1.5px solid var(--gray-light);
-  text-align: center;
+  padding: 36px 32px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: hidden;
   transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.vmvCard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--red));
 }
 
 .vmvCard:hover {
   transform: translateY(-6px);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .vmvIcon {
@@ -92,7 +124,7 @@
   align-items: center;
   justify-content: center;
   color: var(--blue);
-  margin: 0 auto 20px;
+  margin: 0 0 22px;
 }
 
 .vmvIcon svg { width: 26px; height: 26px; }
@@ -126,10 +158,10 @@
 
 .valeurItem {
   text-align: center;
-  padding: 32px 20px;
+  padding: 32px 22px;
   border-radius: var(--r14);
-  border: 1.5px solid var(--gray-light);
-  background: #fff;
+  border: 1px solid var(--line);
+  background: var(--light);
   transition: box-shadow 0.25s;
   cursor: default;
 }
@@ -138,7 +170,7 @@
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--red));
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
   margin: 0 auto 16px;
   display: flex;
   align-items: center;

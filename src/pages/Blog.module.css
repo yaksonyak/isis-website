@@ -1,6 +1,6 @@
 .section {
   background: var(--light);
-  padding: 96px 5%;
+  padding: 64px 5% 96px;
 }
 
 .grid {
@@ -14,15 +14,14 @@
 .card {
   border-radius: var(--r14);
   overflow: hidden;
-  border: 1.5px solid var(--gray-light);
+  border: 1px solid var(--line);
   background: #fff;
   box-shadow: var(--shadow-sm);
-  cursor: pointer;
   transition: box-shadow 0.25s;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-card);
 }
 
 .imgWrap {
@@ -64,7 +63,7 @@
 }
 
 .body h3 {
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--dark);
   margin-bottom: 10px;

@@ -17,7 +17,7 @@ export default function Services() {
       <section className={styles.section}>
         <div className={styles.grid}>
           {services.map((s, i) => (
-            <ServiceCard key={s.id} service={s} delay={i * 0.08} variant="detail" />
+            <ServiceCard key={s.id} service={s} delay={i * 0.08} variant="detail" index={i} />
           ))}
         </div>
       </section>

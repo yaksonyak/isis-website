@@ -60,9 +60,6 @@ export default function Blog() {
           </AnimatePresence>
         </motion.div>
 
-        <div className="text-center" style={{ marginTop: 48 }}>
-          <button className="btn-outline">Voir tous les articles</button>
-        </div>
       </section>
     </main>
   );

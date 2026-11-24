@@ -109,7 +109,7 @@ export default function Contact() {
         <FadeIn>
           <div className={styles.mapWrap}>
             <div className={styles.mapPlaceholder}>
-              <svg width="48" height="48" fill="none" stroke="#64748B" strokeWidth="1.5" viewBox="0 0 24 24">
+              <svg width="48" height="48" fill="none" stroke="#1E88E5" strokeWidth="1.5" viewBox="0 0 24 24">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
                 <circle cx="12" cy="10" r="3" />
               </svg>

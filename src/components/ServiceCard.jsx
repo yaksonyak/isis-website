@@ -42,7 +42,7 @@ const ArrowIcon = () => (
   </svg>
 );
 
-export default function ServiceCard({ service, delay = 0, variant = 'grid' }) {
+export default function ServiceCard({ service, delay = 0, variant = 'grid', index }) {
   const navigate = useNavigate();
 
   return (
@@ -52,8 +52,11 @@ export default function ServiceCard({ service, delay = 0, variant = 'grid' }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.55, delay }}
-      whileHover={{ y: -10 }}
+      whileHover={{ y: -6 }}
     >
+      {index != null && (
+        <span className={styles.num} aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+      )}
       <div className={styles.icon}>
         {ICONS[service.icon]}
       </div>

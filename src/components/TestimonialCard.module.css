@@ -1,62 +1,67 @@
 .card {
-  background: var(--light);
-  border-radius: var(--r14);
-  padding: 36px 30px;
-  border: 1.5px solid var(--gray-light);
+  background: #fff;
+  border-radius: var(--r20);
+  padding: 32px 30px 28px;
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
   transition: box-shadow 0.25s ease;
 }
 
 .card:hover {
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-card);
+}
+
+.top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 18px;
 }
 
 .stars {
   color: #F59E0B;
-  font-size: 13px;
-  letter-spacing: 2px;
-  margin-bottom: 16px;
+  font-size: 15px;
+  letter-spacing: 3px;
+  padding-top: 6px;
 }
 
 .quoteWrap {
-  width: 38px;
-  height: 38px;
-  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 18px;
-  color: #fff;
+  color: var(--blue-light);
+  line-height: 0;
 }
 
 .text {
-  font-size: 14px;
-  color: var(--gray);
-  line-height: 1.8;
-  margin-bottom: 24px;
-  font-style: italic;
+  font-size: 15px;
+  color: #334155;
+  line-height: 1.75;
+  margin-bottom: 26px;
 }
 
 .author {
   display: flex;
   align-items: center;
   gap: 12px;
-  border-top: 1px solid var(--gray-light);
-  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+  margin-top: auto;
 }
 
 .avatar {
   width: 44px;
   height: 44px;
   border-radius: 50%;
-  background: linear-gradient(135deg, var(--blue), var(--red));
+  background: linear-gradient(135deg, var(--blue), var(--blue-dark));
   display: flex;
   align-items: center;
   justify-content: center;
   color: #fff;
   font-weight: 700;
   font-size: 13px;
+  letter-spacing: .5px;
   flex-shrink: 0;
+  box-shadow: 0 0 0 4px var(--blue-light);
 }
 
 .name {
