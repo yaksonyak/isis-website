@@ -9,7 +9,7 @@ import CTASection from '../components/CTASection';
 import PartnerSection from '../components/PartnerSection';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
-import { DashboardArt, BamakoArt } from '../components/Illustrations';
+import { BamakoArt } from '../components/Illustrations';
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
 import styles from './Home.module.css';
@@ -137,7 +137,20 @@ export default function Home() {
           transition={{ duration: 0.9, delay: 0.15 }}
         >
           <div className={styles.heroPhoto}>
-            <DashboardArt className={styles.heroArt} />
+            <div className={styles.heroScene}>
+              <span className={styles.heroBadgeApp}>
+                <span className={styles.offlineDot} />
+                DMPe · Dossier médical patient électronique
+              </span>
+              <div className={`${styles.browser} ${styles.heroShotBack}`}>
+                <div className={styles.browserBar}><span /><span /><span /></div>
+                <img src={dmpeStats} alt="DMPe — statistiques des activités curatives par tranche d'âge" loading="eager" decoding="async" />
+              </div>
+              <div className={`${styles.browser} ${styles.heroShotFront}`}>
+                <div className={styles.browserBar}><span /><span /><span /></div>
+                <img src={dmpeDossiers} alt="DMPe — liste des dossiers patients (données anonymisées)" loading="eager" decoding="async" />
+              </div>
+            </div>
             <div className={styles.heroStats}>
               <div className={styles.heroStat}>
                 <div className={styles.heroStatN}><Counter to={50} suffix="+" /></div>
