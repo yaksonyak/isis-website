@@ -1,12 +1,14 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PageHero from '../components/PageHero';
+import ProjectModal from '../components/ProjectModal';
 import { Cover } from '../components/Illustrations';
 import { projects, projectCategories } from '../data/projects';
 import styles from './Projects.module.css';
 
 export default function Projects() {
   const [active, setActive] = useState('Tous');
+  const [selected, setSelected] = useState(null);
 
   const filtered = active === 'Tous'
     ? projects
@@ -46,6 +48,11 @@ export default function Projects() {
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.35, delay: i * 0.06 }}
                 whileHover={{ y: -6 }}
+                onClick={p.details ? () => setSelected(p) : undefined}
+                onKeyDown={p.details ? (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setSelected(p); } } : undefined}
+                role={p.details ? 'button' : undefined}
+                tabIndex={p.details ? 0 : undefined}
+                aria-label={p.details ? `Voir le détail : ${p.title}` : undefined}
               >
                 <div className={styles.imgWrap}>
                   {p.logo ? (
@@ -62,6 +69,7 @@ export default function Projects() {
                 <div className={styles.info}>
                   <h3>{p.title}</h3>
                   <p>{p.sector}</p>
+                  {p.details && <span className={styles.more}>Voir le détail →</span>}
                 </div>
               </motion.div>
             ))}
@@ -72,6 +80,10 @@ export default function Projects() {
           <button className="btn-outline">Voir tous les projets</button>
         </div>
       </section>
+
+      <AnimatePresence>
+        {selected && <ProjectModal project={selected} onClose={() => setSelected(null)} />}
+      </AnimatePresence>
     </main>
   );
 }
