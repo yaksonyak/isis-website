@@ -162,3 +162,25 @@
 .detail:hover::after {
   transform: scaleX(1);
 }
+
+/* Cursor-following glow */
+.card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity .3s;
+  background:
+    radial-gradient(240px circle at var(--gx, 50%) var(--gy, 50%), rgba(30, 136, 229, .12), transparent 70%);
+}
+
+.card:hover::after {
+  opacity: 1;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
+}

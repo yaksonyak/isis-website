@@ -7,33 +7,38 @@ const PARTNERS = [
   { name: 'Java', style: { color: '#E65100', fontSize: '20px' } },
   { name: 'Spring', style: { color: '#6db33f', fontSize: '20px' } },
   { name: 'Angular', style: { color: '#DD0031', fontSize: '20px' } },
+  { name: 'Flutter', style: { color: '#02569B', fontSize: '20px' } },
 ];
+
+// Two identical runs side by side; the track slides by exactly one run.
+const RUN = [...PARTNERS, ...PARTNERS];
 
 export default function PartnerSection({ eyebrow = 'ILS NOUS FONT CONFIANCE' }) {
   return (
     <section className={styles.section}>
       <div className={styles.eyebrow}>{eyebrow}</div>
       <motion.div
-        className={styles.logos}
+        className={styles.marquee}
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6 }}
       >
-        {PARTNERS.map((p) => (
-          <motion.div
-            key={p.name}
-            className={styles.logo}
-            style={{ ...p.style, fontWeight: 800 }}
-            whileHover={{ opacity: 0.9, scale: 1.05 }}
-          >
-            {p.name === 'AXELOR' ? (
-              <>AXE<span style={{ color: '#FF4D4F' }}>L</span>ØR</>
-            ) : (
-              p.name
-            )}
-          </motion.div>
-        ))}
+        <div className={styles.track}>
+          {[0, 1].map((copy) => (
+            <div className={styles.run} key={copy} aria-hidden={copy === 1}>
+              {RUN.map((p, i) => (
+                <div key={`${p.name}-${i}`} className={styles.logo} style={{ ...p.style, fontWeight: 800 }}>
+                  {p.name === 'AXELOR' ? (
+                    <>AXE<span style={{ color: '#FF4D4F' }}>L</span>ØR</>
+                  ) : (
+                    p.name
+                  )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </motion.div>
     </section>
   );

@@ -53,6 +53,12 @@ export default function ServiceCard({ service, delay = 0, variant = 'grid' }) {
       viewport={{ once: true, margin: '-40px' }}
       transition={{ duration: 0.55, delay }}
       whileHover={{ y: -10 }}
+      onMouseMove={(e) => {
+        // Cursor-following glow (see ::after in the CSS)
+        const r = e.currentTarget.getBoundingClientRect();
+        e.currentTarget.style.setProperty('--gx', `${e.clientX - r.left}px`);
+        e.currentTarget.style.setProperty('--gy', `${e.clientY - r.top}px`);
+      }}
     >
       <div className={styles.icon}>
         {ICONS[service.icon]}
