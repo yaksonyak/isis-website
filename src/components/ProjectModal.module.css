@@ -111,6 +111,13 @@
   line-height: 1.25;
 }
 
+.tagline {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--blue);
+  margin-top: 6px;
+}
+
 .sector {
   font-size: 13px;
   color: var(--gray);

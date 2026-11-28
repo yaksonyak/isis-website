@@ -64,12 +64,13 @@ export default function ProjectModal({ project, onClose }) {
         <div className={styles.body}>
           <span className={styles.tag}>{project.category}</span>
           <h2 id="project-modal-title">{project.title}</h2>
+          {details.tagline && <p className={styles.tagline}>{details.tagline}</p>}
           <p className={styles.sector}>{project.sector}</p>
           <p className={styles.summary}>{details.summary}</p>
 
           {details.modules && (
             <>
-              <h3>Les modules</h3>
+              <h3>{details.modulesTitle || 'Les modules'}</h3>
               <ul className={styles.modules}>
                 {details.modules.map((m) => (
                   <li key={m.title}><strong>{m.title}</strong>{m.desc}</li>
@@ -80,7 +81,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {details.highlights && (
             <>
-              <h3>Règles métier maîtrisées</h3>
+              <h3>{details.highlightsTitle || 'Règles métier maîtrisées'}</h3>
               <ul className={styles.highlights}>
                 {details.highlights.map((h) => <li key={h}>{h}</li>)}
               </ul>
