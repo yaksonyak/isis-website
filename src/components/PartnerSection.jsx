@@ -1,13 +1,17 @@
 import { motion } from 'framer-motion';
+import aRevet from '../assets/partners/a-revet.webp';
+import isa from '../assets/partners/isa-koulikoro.webp';
+import icones from '../assets/partners/icones.webp';
+import noor from '../assets/partners/college-noor.webp';
+import smtd from '../assets/partners/smtd.webp';
 import styles from './PartnerSection.module.css';
 
 const PARTNERS = [
-  { name: 'AXELOR', style: { color: '#1E88E5', fontSize: '22px' }, highlight: { color: '#FF4D4F' }, highlightChar: 'L' },
-  { name: 'Dolibarr', style: { color: '#2196F3', fontSize: '22px' } },
-  { name: 'Java', style: { color: '#E65100', fontSize: '20px' } },
-  { name: 'Spring', style: { color: '#6db33f', fontSize: '20px' } },
-  { name: 'Angular', style: { color: '#DD0031', fontSize: '20px' } },
-  { name: 'Flutter', style: { color: '#02569B', fontSize: '20px' } },
+  { name: 'A-REVET — Les revêtements et plus', logo: aRevet },
+  { name: 'Institut des Sciences Appliquées (I.S.A) — Koulikoro', logo: isa, tall: true },
+  { name: 'Icônes Complexe Scolaire', logo: icones, tall: true },
+  { name: 'Collège NOOR', logo: noor, tall: true },
+  { name: 'SMTD — Société Malienne de Transmission et de Diffusion', logo: smtd },
 ];
 
 // Two identical runs side by side; the track slides by exactly one run.
@@ -28,12 +32,8 @@ export default function PartnerSection({ eyebrow = 'ILS NOUS FONT CONFIANCE' }) 
           {[0, 1].map((copy) => (
             <div className={styles.run} key={copy} aria-hidden={copy === 1}>
               {RUN.map((p, i) => (
-                <div key={`${p.name}-${i}`} className={styles.logo} style={{ ...p.style, fontWeight: 800 }}>
-                  {p.name === 'AXELOR' ? (
-                    <>AXE<span style={{ color: '#FF4D4F' }}>L</span>ØR</>
-                  ) : (
-                    p.name
-                  )}
+                <div key={`${p.name}-${i}`} className={`${styles.logo} ${p.tall ? styles.tall : ''}`} title={p.name}>
+                  <img src={p.logo} alt={copy === 0 && i < PARTNERS.length ? p.name : ''} loading="lazy" decoding="async" />
                 </div>
               ))}
             </div>
