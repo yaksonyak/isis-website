@@ -1,6 +1,12 @@
 .section {
   background: var(--light);
-  padding: 64px 5%;
+  padding: 88px 5%;
+}
+
+.head {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto 48px;
 }
 
 .eyebrow {
@@ -8,9 +14,8 @@
   font-weight: 700;
   letter-spacing: 3px;
   text-transform: uppercase;
-  color: var(--gray);
-  text-align: center;
-  margin-bottom: 40px;
+  color: var(--red);
+  margin-bottom: 12px;
   display: flex;
   align-items: center;
   gap: 16px;
@@ -21,58 +26,140 @@
 .eyebrow::after {
   content: '';
   flex: 1;
-  max-width: 120px;
+  max-width: 64px;
   height: 1px;
-  background: var(--gray-light);
+  background: currentColor;
+  opacity: .35;
 }
 
-.marquee {
+.title {
+  font-size: clamp(22px, 2.4vw, 30px);
+  font-weight: 800;
+  line-height: 1.3;
+  color: var(--dark);
+}
+
+.title em {
+  font-style: normal;
+  color: var(--blue);
+}
+
+/* Uniform tiles: every logo gets the same frame */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 18px;
+  max-width: 1180px;
+  margin: 0 auto;
+}
+
+.tile {
+  position: relative;
+  background: #fff;
+  border: 1px solid var(--gray-light);
+  border-radius: var(--r14);
   overflow: hidden;
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  transition: transform .35s cubic-bezier(.22, .61, .36, 1), box-shadow .35s, border-color .35s;
 }
 
-.track {
-  display: flex;
-  width: max-content;
-  animation: marquee 32s linear infinite;
+/* Thin brand line revealed on hover */
+.tile::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--blue), var(--red));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform .35s ease;
 }
 
-.marquee:hover .track {
-  animation-play-state: paused;
+.tile:hover {
+  transform: translateY(-6px);
+  border-color: transparent;
+  box-shadow: 0 22px 44px -18px rgba(15, 23, 42, .28);
 }
 
-.run {
-  display: flex;
-  align-items: center;
-  gap: 64px;
-  padding-right: 64px;
+.tile:hover::before {
+  transform: scaleX(1);
 }
 
-.logo {
-  opacity: 0.45;
-  cursor: default;
-  white-space: nowrap;
-  transition: opacity 0.25s, transform 0.25s;
-  user-select: none;
+.logoBox {
+  position: relative;
+  aspect-ratio: 4 / 3;
 }
 
-.logo:hover {
+/* Absolutely centred so a tall logo can never stretch its tile */
+.logoBox img {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  display: block;
+  object-fit: contain;
+  filter: grayscale(1);
+  opacity: .72;
+  transition: filter .4s, opacity .4s, transform .4s;
+}
+
+.square {
+  max-width: 70%;
+  max-height: 74%;
+}
+
+.wide {
+  max-width: 86%;
+  max-height: 52%;
+}
+
+.tile:hover .logoBox img {
+  filter: none;
   opacity: 1;
-  transform: scale(1.08);
+  transform: scale(1.05);
 }
 
-@keyframes marquee {
-  to { transform: translateX(-50%); }
+.caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 10px 10px 14px;
+  border-top: 1px solid var(--gray-light);
+  text-align: center;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .track { animation: none; }
+.name {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dark);
+  line-height: 1.3;
 }
 
-@media (max-width: 768px) {
-  .run {
-    gap: 40px;
-    padding-right: 40px;
+.sector {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: .5px;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+
+/* Touch screens have no hover: show logos in full colour */
+@media (hover: none) {
+  .logoBox img {
+    filter: none;
+    opacity: 1;
   }
+}
+
+@media (max-width: 1024px) {
+  .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 560px) {
+  .section { padding: 64px 16px; }
+  .head { margin-bottom: 32px; }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .name { font-size: 12px; }
+  .sector { font-size: 10px; }
 }

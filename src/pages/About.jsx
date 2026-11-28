@@ -109,7 +109,7 @@ export default function About() {
         </div>
       </section>
 
-      <PartnerSection eyebrow="NOS PARTENAIRES TECHNOLOGIQUES" />
+      <PartnerSection />
     </main>
   );
 }

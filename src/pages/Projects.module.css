@@ -405,6 +405,7 @@
 
 @media (max-width: 540px) {
   .showcase { padding-top: 64px; }
+  .showActions > * { flex: 1; justify-content: center; }
   .showRow { margin-bottom: 72px; }
   .bigNum { font-size: 64px; }
   .floatPill { font-size: 11px; padding: 7px 12px; }
