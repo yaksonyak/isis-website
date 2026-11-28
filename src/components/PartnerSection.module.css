@@ -44,7 +44,7 @@
   color: var(--blue);
 }
 
-/* Uniform tiles: every logo gets the same frame */
+/* Uniform cards that flip over in 3D */
 .grid {
   display: grid;
   grid-template-columns: repeat(6, minmax(0, 1fr));
@@ -53,45 +53,64 @@
   margin: 0 auto;
 }
 
-.tile {
+.cell {
+  perspective: 1100px;
+}
+
+.card {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  text-align: center;
+  aspect-ratio: 3 / 3.4;
+  border-radius: var(--r14);
+}
+
+.inner {
   position: relative;
-  background: #fff;
-  border: 1px solid var(--gray-light);
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform .8s cubic-bezier(.3, 1.35, .5, 1);
+}
+
+@media (hover: hover) {
+  .card:hover .inner { transform: rotateY(180deg); }
+}
+
+.card:focus-visible .inner,
+.flipped .inner {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
   border-radius: var(--r14);
   overflow: hidden;
-  transition: transform .35s cubic-bezier(.22, .61, .36, 1), box-shadow .35s, border-color .35s;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
 }
 
-/* Thin brand line revealed on hover */
-.tile::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 3px;
-  background: linear-gradient(90deg, var(--blue), var(--red));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .35s ease;
-}
-
-.tile:hover {
-  transform: translateY(-6px);
-  border-color: transparent;
-  box-shadow: 0 22px 44px -18px rgba(15, 23, 42, .28);
-}
-
-.tile:hover::before {
-  transform: scaleX(1);
+/* Front */
+.front {
+  background: #fff;
+  border: 1px solid var(--gray-light);
 }
 
 .logoBox {
   position: relative;
-  aspect-ratio: 4 / 3;
+  flex: 1;
 }
 
-/* Absolutely centred so a tall logo can never stretch its tile */
+/* Absolutely centred so a tall logo can never stretch its card */
 .logoBox img {
   position: absolute;
   inset: 0;
@@ -100,7 +119,6 @@
   object-fit: contain;
   filter: grayscale(1);
   opacity: .72;
-  transition: filter .4s, opacity .4s, transform .4s;
 }
 
 .square {
@@ -110,13 +128,7 @@
 
 .wide {
   max-width: 86%;
-  max-height: 52%;
-}
-
-.tile:hover .logoBox img {
-  filter: none;
-  opacity: 1;
-  transform: scale(1.05);
+  max-height: 46%;
 }
 
 .caption {
@@ -126,7 +138,6 @@
   gap: 2px;
   padding: 10px 10px 14px;
   border-top: 1px solid var(--gray-light);
-  text-align: center;
 }
 
 .name {
@@ -144,12 +155,119 @@
   text-transform: uppercase;
 }
 
+/* Back */
+.back {
+  transform: rotateY(180deg);
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 18px 14px;
+  color: #fff;
+  background: linear-gradient(150deg, #1E88E5 0%, #1565C0 55%, #0D47A1 100%);
+  box-shadow: 0 24px 50px -18px rgba(13, 71, 161, .55);
+}
+
+/* Soft red light drifting behind the text */
+.backGlow {
+  position: absolute;
+  width: 90%;
+  aspect-ratio: 1;
+  right: -40%;
+  bottom: -40%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 77, 79, .55), transparent 65%);
+  animation: glow 6s ease-in-out infinite;
+}
+
+@keyframes glow {
+  0%, 100% { translate: 0 0; }
+  50% { translate: -30% -25%; }
+}
+
+.short,
+.rule,
+.full,
+.chip {
+  position: relative;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+/* Text rises in once the card has turned */
+@media (hover: hover) {
+  .card:hover .short,
+  .card:hover .rule,
+  .card:hover .full,
+  .card:hover .chip { opacity: 1; transform: none; }
+}
+
+.card:focus-visible .short,
+.card:focus-visible .rule,
+.card:focus-visible .full,
+.card:focus-visible .chip,
+.flipped .short,
+.flipped .rule,
+.flipped .full,
+.flipped .chip {
+  opacity: 1;
+  transform: none;
+}
+
+.short { transition-delay: .25s; }
+.rule { transition-delay: .32s; }
+.full { transition-delay: .4s; }
+.chip { transition-delay: .48s; }
+
+.short {
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: .5px;
+  line-height: 1.1;
+}
+
+.rule {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--red);
+}
+
+.full {
+  font-size: 12.5px;
+  font-weight: 500;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, .92);
+}
+
+.chip {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, .16);
+  border: 1px solid rgba(255, 255, 255, .3);
+}
+
+.hint {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--gray);
+}
+
 /* Touch screens have no hover: show logos in full colour */
 @media (hover: none) {
   .logoBox img {
     filter: none;
     opacity: 1;
   }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .inner { transition: none; }
+  .backGlow { animation: none; }
 }
 
 @media (max-width: 1024px) {
@@ -162,4 +280,6 @@
   .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .name { font-size: 12px; }
   .sector { font-size: 10px; }
+  .short { font-size: 18px; }
+  .full { font-size: 11.5px; }
 }
