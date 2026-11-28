@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
+import { motion, AnimatePresence } from 'framer-motion';
 import styles from './ProjectModal.module.css';
 
 export default function ProjectModal({ project, onClose }) {
@@ -18,7 +19,8 @@ export default function ProjectModal({ project, onClose }) {
 
   const gallery = details.gallery || [];
 
-  return (
+  // Rendered in <body> so page-transition transforms can't offset it
+  return createPortal(
     <motion.div
       className={styles.backdrop}
       onClick={onClose}
@@ -42,7 +44,17 @@ export default function ProjectModal({ project, onClose }) {
         {gallery.length > 0 && (
           <div className={styles.gallery}>
             <div className={styles.shotMain}>
-              <img src={gallery[shot].src} alt={gallery[shot].alt} />
+              <AnimatePresence mode="wait" initial={false}>
+                <motion.img
+                  key={shot}
+                  src={gallery[shot].src}
+                  alt={gallery[shot].alt}
+                  initial={{ opacity: 0, x: 24 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -24 }}
+                  transition={{ duration: 0.25 }}
+                />
+              </AnimatePresence>
             </div>
             {gallery.length > 1 && (
               <div className={styles.thumbs}>
@@ -95,6 +107,7 @@ export default function ProjectModal({ project, onClose }) {
           )}
         </div>
       </motion.div>
-    </motion.div>
+    </motion.div>,
+    document.body,
   );
 }

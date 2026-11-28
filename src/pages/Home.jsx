@@ -70,6 +70,13 @@ const DMPE_FEATURES = [
   },
 ];
 
+const HERO_WORDS = [
+  { t: 'Accélérez' },
+  { t: 'votre', br: true },
+  { t: 'transformation' },
+  { t: 'digitale', em: true },
+];
+
 const STATS = [
   {
     icon: <svg fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 16l4-8 4 8"/><path d="M9 12h6"/></svg>,
@@ -106,9 +113,22 @@ export default function Home() {
             <span className={styles.heroDot} />
             ISIS Consulting — Bamako, Mali
           </div>
-          <h1>
-            Accélérez votre<br />
-            transformation <em>digitale</em>
+          <h1 aria-label="Accélérez votre transformation digitale">
+            {HERO_WORDS.map((w, i) => (
+              <span key={w.t} aria-hidden="true">
+                <span className={styles.wordMask}>
+                  <motion.span
+                    className={styles.word}
+                    initial={{ y: '110%' }}
+                    animate={{ y: '0%' }}
+                    transition={{ duration: 0.8, delay: 0.15 + i * 0.12, ease: [0.22, 0.61, 0.36, 1] }}
+                  >
+                    {w.em ? <em>{w.t}</em> : w.t}
+                  </motion.span>
+                </span>
+                {w.br ? <br /> : ' '}
+              </span>
+            ))}
           </h1>
           <p className={styles.heroSub}>
             Nous accompagnons les entreprises d'Afrique de l'Ouest dans leur
