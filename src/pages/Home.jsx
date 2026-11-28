@@ -159,12 +159,12 @@ export default function Home() {
             performantes et adaptées à leur contexte.
           </p>
           <div className={styles.heroBtns}>
-            <Magnetic>
+            <Magnetic className={styles.magnet}>
               <button className={`btn-red ${styles.shine}`} onClick={() => navigate('/contact')}>
                 Demander un devis
               </button>
             </Magnetic>
-            <Magnetic>
+            <Magnetic className={styles.magnet}>
               <button className="btn-outline" onClick={() => navigate('/services')}>
                 Découvrir nos services
               </button>

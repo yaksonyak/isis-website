@@ -253,6 +253,11 @@
   .pin { font-size: 10.5px; padding: 4px 9px; }
 }
 
+/* Very small phones: the « Bamako » tag would cover a tile */
+@media (max-width: 400px) {
+  .pin { display: none; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .orbit, .glow, .pulse, .linkFlow, .tileFloat { animation: none; }
 }

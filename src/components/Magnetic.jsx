@@ -1,7 +1,7 @@
 import { motion, useMotionValue, useSpring } from 'framer-motion';
 
 // Wraps a button/link so it is gently pulled toward the cursor.
-export default function Magnetic({ children, strength = 0.3 }) {
+export default function Magnetic({ children, strength = 0.3, className }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const sx = useSpring(x, { stiffness: 220, damping: 15, mass: 0.4 });
@@ -15,7 +15,12 @@ export default function Magnetic({ children, strength = 0.3 }) {
   const onLeave = () => { x.set(0); y.set(0); };
 
   return (
-    <motion.span style={{ x: sx, y: sy, display: 'inline-flex' }} onMouseMove={onMove} onMouseLeave={onLeave}>
+    <motion.span
+      className={className}
+      style={{ x: sx, y: sy, display: className ? undefined : 'inline-flex' }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
       {children}
     </motion.span>
   );

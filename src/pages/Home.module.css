@@ -84,6 +84,10 @@
 }
 
 /* Light sweep across the main call-to-action */
+.magnet {
+  display: inline-flex;
+}
+
 .shine {
   position: relative;
   overflow: hidden;
@@ -371,6 +375,9 @@
 
 .aboutVisual {
   min-width: 0;
+  width: 100%;
+  max-width: 560px;
+  justify-self: center;
 }
 
 /* ── SERVICES ── */
@@ -636,6 +643,16 @@
 }
 
 @media (max-width: 540px) {
+  /* Full-width, equal call-to-action buttons on phones */
+  .heroBtns {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .magnet,
+  .magnet > button {
+    width: 100%;
+    justify-content: center;
+  }
   .heroBadgeApp {
     font-size: 10px;
     padding: 5px 10px;
