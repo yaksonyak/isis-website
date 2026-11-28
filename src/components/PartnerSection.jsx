@@ -4,9 +4,11 @@ import isa from '../assets/partners/isa-koulikoro.webp';
 import icones from '../assets/partners/icones.webp';
 import noor from '../assets/partners/college-noor.webp';
 import smtd from '../assets/partners/smtd.webp';
+import aspPsm from '../assets/partners/asp-psm.webp';
 import styles from './PartnerSection.module.css';
 
 const PARTNERS = [
+  { name: "ASP-PSM — Alliance du Secteur Privé pour la Promotion de la Santé au Mali", logo: aspPsm, tall: true },
   { name: 'A-REVET — Les revêtements et plus', logo: aRevet },
   { name: 'Institut des Sciences Appliquées (I.S.A) — Koulikoro', logo: isa, tall: true },
   { name: 'Icônes Complexe Scolaire', logo: icones, tall: true },
