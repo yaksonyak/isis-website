@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { Link, useNavigate } from 'react-router-dom';
 import { useInView } from 'framer-motion';
 import ServiceCard from '../components/ServiceCard';
@@ -9,7 +9,8 @@ import CTASection from '../components/CTASection';
 import PartnerSection from '../components/PartnerSection';
 import { services } from '../data/services';
 import { testimonials } from '../data/testimonials';
-import { BamakoArt } from '../components/Illustrations';
+import Ecosystem from '../components/Ecosystem';
+import Magnetic from '../components/Magnetic';
 import dmpeDossiers from '../assets/projects/dmpe-dossiers.webp';
 import dmpeStats from '../assets/projects/dmpe-statistiques.webp';
 import styles from './Home.module.css';
@@ -99,10 +100,32 @@ const STATS = [
 export default function Home() {
   const navigate = useNavigate();
 
+  // Hero: spotlight follows the pointer (CSS variables, no re-render)
+  // and the product frame tilts toward it.
+  const heroRef = useRef(null);
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const rotateX = useSpring(useTransform(tiltY, (v) => v * -8), { stiffness: 120, damping: 16 });
+  const rotateY = useSpring(useTransform(tiltX, (v) => v * 10), { stiffness: 120, damping: 16 });
+  const onHeroMove = (e) => {
+    const el = heroRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    el.style.setProperty('--mx', `${e.clientX - r.left}px`);
+    el.style.setProperty('--my', `${e.clientY - r.top}px`);
+    tiltX.set((e.clientX - r.left) / r.width - 0.5);
+    tiltY.set((e.clientY - r.top) / r.height - 0.5);
+  };
+  const onHeroLeave = () => { tiltX.set(0); tiltY.set(0); };
+
   return (
     <main>
       {/* ── HERO ── */}
-      <section className={styles.hero}>
+      <section className={styles.hero} ref={heroRef} onMouseMove={onHeroMove} onMouseLeave={onHeroLeave}>
+        <div className={styles.heroDots} aria-hidden="true" />
+        <div className={styles.heroSpot} aria-hidden="true" />
+        <span className={`${styles.heroBlob} ${styles.heroBlobA}`} aria-hidden="true" />
+        <span className={`${styles.heroBlob} ${styles.heroBlobB}`} aria-hidden="true" />
         <motion.div
           className={styles.heroText}
           initial={{ opacity: 0, y: 28 }}
@@ -136,12 +159,16 @@ export default function Home() {
             performantes et adaptées à leur contexte.
           </p>
           <div className={styles.heroBtns}>
-            <button className="btn-red" onClick={() => navigate('/contact')}>
-              Demander un devis
-            </button>
-            <button className="btn-outline" onClick={() => navigate('/services')}>
-              Découvrir nos services
-            </button>
+            <Magnetic>
+              <button className={`btn-red ${styles.shine}`} onClick={() => navigate('/contact')}>
+                Demander un devis
+              </button>
+            </Magnetic>
+            <Magnetic>
+              <button className="btn-outline" onClick={() => navigate('/services')}>
+                Découvrir nos services
+              </button>
+            </Magnetic>
           </div>
           <div className={styles.heroProofs}>
             <span><span className={styles.proofDot} />Expertise certifiée</span>
@@ -156,7 +183,7 @@ export default function Home() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.15 }}
         >
-          <div className={styles.heroPhoto}>
+          <motion.div className={styles.heroPhoto} style={{ rotateX, rotateY, transformPerspective: 1200 }}>
             <div className={styles.heroScene}>
               <span className={styles.heroBadgeApp}>
                 <span className={styles.offlineDot} />
@@ -181,7 +208,7 @@ export default function Home() {
                 <div className={styles.heroStatL}>Clients satisfaits</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -212,13 +239,13 @@ export default function Home() {
           </motion.div>
 
           <motion.div
-            className={styles.aboutPhotoWrap}
+            className={styles.aboutVisual}
             initial={{ opacity: 0, x: 32 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: '-60px' }}
             transition={{ duration: 0.7 }}
           >
-            <BamakoArt className={styles.aboutArt} />
+            <Ecosystem />
           </motion.div>
         </div>
       </section>
