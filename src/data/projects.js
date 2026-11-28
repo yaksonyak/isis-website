@@ -9,6 +9,10 @@ import schoolPaiements from '../assets/projects/school-paiements.webp';
 import agriCaisse from '../assets/projects/agristock-caisse.webp';
 import agriDashboard from '../assets/projects/agristock-dashboard.webp';
 import agriPrix from '../assets/projects/agristock-prix.webp';
+import pharmaDashboard from '../assets/projects/pharma-dashboard.webp';
+import pharmaProduits from '../assets/projects/pharma-produits.webp';
+import pharmaAchats from '../assets/projects/pharma-achats.webp';
+import pharmaSyscohada from '../assets/projects/pharma-syscohada.webp';
 
 export const projects = [
   {
@@ -93,6 +97,34 @@ export const projects = [
         { src: agriCaisse, alt: 'AgriStock — caisse avec panier, vente au détail ou en gros' },
         { src: agriDashboard, alt: "AgriStock — tableau de bord : chiffre d'affaires, marge, stock, créances" },
         { src: agriPrix, alt: 'AgriStock — prix et stocks initiaux par conditionnement' },
+      ],
+    },
+  },
+  {
+    id: 10,
+    title: "ISIS Pharma — ERP de gestion d'officine",
+    sector: 'Secteur : Santé · Pharmacie',
+    category: 'ERP',
+    image: pharmaDashboard,
+    details: {
+      tagline: 'Le logiciel de gestion de pharmacie, accessible en ligne',
+      summary:
+        "ERP de gestion d'officine qui regroupe dans une seule interface la vente au comptoir, la caisse, le stock, les achats, le suivi des assurances et la comptabilité.",
+      url: 'https://pharma.erp-isis.ml',
+      modules: [
+        { title: 'Tableau de bord', desc: "Vue d'ensemble de l'activité : CA du jour et du mois, valeur du stock, caisses ouvertes, alertes de seuil et de lots périmés." },
+        { title: 'Terminal de vente', desc: "L'écran de caisse pour la vente au comptoir, avec l'historique de toutes les ventes." },
+        { title: 'Sessions de caisse', desc: 'Ouverture et clôture des caisses.' },
+        { title: 'Produits', desc: "Catégories, import et export Excel, valeur d'achat du stock, alertes sous le seuil et péremption à moins de 90 jours." },
+        { title: 'Achats / réceptions', desc: 'Achats fournisseurs, références de facture, suivi du reste à payer.' },
+        { title: 'Assureurs / tiers payants', desc: 'Gestion de la part remboursée par les assurances.' },
+        { title: 'États financiers SYSCOHADA', desc: 'Balance, grand livre, compte de résultat, bilan et déclaration de TVA, imprimables.' },
+      ],
+      gallery: [
+        { src: pharmaDashboard, alt: 'ISIS Pharma — tableau de bord' },
+        { src: pharmaProduits, alt: 'ISIS Pharma — produits : valeur du stock, seuil, péremption' },
+        { src: pharmaAchats, alt: 'ISIS Pharma — achats et réceptions fournisseurs' },
+        { src: pharmaSyscohada, alt: 'ISIS Pharma — états financiers SYSCOHADA (balance générale)' },
       ],
     },
   },
